@@ -504,15 +504,15 @@ body {
 .slide {
   position: absolute; inset: 0;
   background-size: cover;
-  background-position: center;
+  background-position: center center;
   background-repeat: no-repeat;
   opacity: 0;
   transition: opacity 1.6s ease-in-out;
-  /* Slow Ken Burns zoom */
   animation: kenburns 8s ease-in-out infinite alternate;
+  transform-origin: center center;
+  will-change: transform;
 }
 .slide.active { opacity: 1; }
-
 /* Different zoom direction for variety */
 .slide:nth-child(1) { animation-name: kb1; }
 .slide:nth-child(2) { animation-name: kb2; }
@@ -521,18 +521,17 @@ body {
 .slide:nth-child(5) { animation-name: kb5; }
 
 @keyframes kb1 { from { transform: scale(1); } to { transform: scale(1.08) translate(1%, 1%); } }
-@keyframes kb2 { from { transform: scale(1.06) translate(-1%, 0); } to { transform: scale(1); } }
+@keyframes kb2 { from { transform: scale(1.06) translate(-1%, 0); } to { transform: scale(1.02); } }
 @keyframes kb3 { from { transform: scale(1); } to { transform: scale(1.07) translate(-1%, -1%); } }
-@keyframes kb4 { from { transform: scale(1.05) translate(1%, -1%); } to { transform: scale(1); } }
+@keyframes kb4 { from { transform: scale(1.05) translate(1%, -1%); } to { transform: scale(1.02); } }
 @keyframes kb5 { from { transform: scale(1); } to { transform: scale(1.08) translate(0, 1%); } }
 
 /* Placeholder gradient when no image is set */
-.slide-1 { background: linear-gradient(135deg, #2C1F0A 0%, #4A3010 40%, #1A6B80 100%); }
-.slide-2 { background: linear-gradient(135deg, #1A3A50 0%, #0E7A95 50%, #2C1F0A 100%); }
-.slide-3 { background: linear-gradient(135deg, #3A2005 0%, #7B4A10 40%, #1A4A60 100%); }
-.slide-4 { background: linear-gradient(135deg, #0A3040 0%, #1AACCF 60%, #2C1F0A 100%); }
-.slide-5 { background: linear-gradient(135deg, #2C1F0A 0%, #D4861A 50%, #0E7A95 100%); }
-
+.slide-1 { background-image: linear-gradient(135deg, #2C1F0A 0%, #4A3010 40%, #1A6B80 100%); }
+.slide-2 { background-image: linear-gradient(135deg, #1A3A50 0%, #0E7A95 50%, #2C1F0A 100%); }
+.slide-3 { background-image: linear-gradient(135deg, #3A2005 0%, #7B4A10 40%, #1A4A60 100%); }
+.slide-4 { background-image: linear-gradient(135deg, #0A3040 0%, #1AACCF 60%, #2C1F0A 100%); }
+.slide-5 { background-image: linear-gradient(135deg, #2C1F0A 0%, #D4861A 50%, #0E7A95 100%); }
 /* ===== DARK OVERLAY ===== */
 .hero-overlay {
   position: absolute; inset: 0; z-index: 1;
