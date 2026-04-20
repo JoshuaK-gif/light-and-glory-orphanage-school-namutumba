@@ -744,7 +744,7 @@ h1.hero-title .sky {
   nav { padding: 0 20px; }
   .nav-links { display: none; }
   .hero-content { padding: 100px 28px 60px; }
-  h1.hero-title { font-size: 40px; }
+  h1.hero-title { font-size: 2rem; }
   .hero-desc { font-size: 15px; }
   .objectives { grid-template-columns: repeat(2, 1fr); }
   .slide-label { display: none; }
