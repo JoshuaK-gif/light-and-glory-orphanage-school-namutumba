@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Volunteer Application Light & Glory Orphanage School</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Lato:wght@300;400;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="volunteer.css"/>
+  <script src="volunteer.js" defer ></script>
+</head>
+<body>
+
+<div id="scroll-progress"></div>
+<!-- ===== NAVBAR ===== -->
+<nav class="navbar" id="navbar">
+  <a href="#" class="logo">
+    <div class="logo-img-wrap">
+      <!-- Replace src with your actual logo path -->
+      <img src="lightandglorylogo.png" alt="Light and Glory Transformation Ministries Logo" class="logo-img">
+    </div>
+    <div class="logo-text">
+      <span class="logo-name">Light <em>&</em> Glory</span>
+      <span class="logo-sub">Orphanage School Namutumba</span>
+    </div>
+  </a>
+
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html">About Us</a></li>
+    <li><a href="volunteer.html">Volunteer</a></li>
+    <li><a href="contact.html">Contact</a></li>
+    <li><a href="donate.html" class="btn-donate">Give</a></li>
+  </ul>
+
+  <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- Backdrop (dims page behind drawer) -->
+<div class="drawer-backdrop" id="drawerBackdrop" onclick="closeMenu()"></div>
+
+<!-- Side Drawer -->
+<div class="mobile-nav" id="mobileNav" role="navigation" aria-label="Mobile navigation">
+  <div class="drawer-header">
+    <div class="drawer-logo">
+      <strong>Light & Glory</strong>
+      Orphanage School Namutumba
+    </div>
+    <button class="mobile-nav-close" onclick="closeMenu()" aria-label="Close menu"></button>
+  </div>
+
+  <div class="drawer-links">
+    <a href="index.html" onclick="closeMenu()">Home</a>
+    <a href="about.html" onclick="closeMenu()">About Us</a>
+    <a href="volunteer.html" onclick="closeMenu()">Volunteer</a>
+    <a href="contact.html" onclick="closeMenu()">Contact</a>
+    <a href="donate.html" class="m-donate" onclick="closeMenu()">Give / Donate</a>
+  </div>
+</div>
+
+<!-- HERO -->
+<div class="hero-strip">
+  <div class="hero-badge">🤝 Volunteer Application</div>
+  <h1>Join Our <em>Family</em> of Servants</h1>
+  <p>Fill in the form below and we'll be in touch within 3 working days. Every field you complete helps us find the best role for you.</p>
+  <svg class="hero-wave" viewBox="0 0 1440 55" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0,30 C400,65 1040,0 1440,35 L1440,55 L0,55 Z" fill="#FFFBF3"/>
+  </svg>
+</div>
+
+<!-- PAGE WRAP -->
+<div class="page-wrap">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-card">
+      <h3>What We Offer</h3>
+      <ul>
+        <li><span class="ico"></span> Daily meals during your placement</li>
+        <li><span class="ico"></span> Accommodation guidance for long stays</li>
+        <li><span class="ico"></span> Orientation on your first day</li>
+        <li><span class="ico"></span> Certificate of service on completion</li>
+        <li><span class="ico"></span> A warm welcome from 120+ children</li>
+      </ul>
+    </div>
+
+    <div class="sidebar-card">
+      <h3>Available Roles</h3>
+      <div class="roles-list">
+        <span class="role-chip chip-blue"> Teaching &amp; Tutoring</span>
+        <span class="role-chip chip-gold"> Childcare &amp; Mentoring</span>
+        <span class="role-chip chip-green"> Healthcare &amp; Medical</span>
+        <span class="role-chip chip-indigo"> Vocational &amp; Trades</span>
+        <span class="role-chip chip-pink"> Music, Art &amp; Sports</span>
+        <span class="role-chip chip-purple"> Admin, IT &amp; Remote</span>
+      </div>
+    </div>
+
+    <div class="sidebar-card">
+      <h3>Contact Us</h3>
+      <div class="contact-detail">
+        <div class="contact-item"><span class="ico"></span><div><strong>Address</strong>Namutumba District, Eastern Uganda</div></div>
+        <div class="contact-item"><span class="ico"></span><div><strong>Email</strong>info@lightandglory.org</div></div>
+        <div class="contact-item"><span class="ico"></span><div><strong>WhatsApp</strong>+256 757 970 467</div></div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- FORM CARD -->
+  <div>
+    <div class="form-card">
+
+      <!-- progress -->
+      <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+
+      <!-- tabs -->
+      <div class="step-tabs">
+        <div class="step-tab active" id="tab1">
+          <span class="tab-num">1</span><span class="tab-label">Personal Info</span>
+        </div>
+        <div class="step-tab" id="tab2">
+          <span class="tab-num">2</span><span class="tab-label">Volunteer Details</span>
+        </div>
+        <div class="step-tab" id="tab3">
+          <span class="tab-num">3</span><span class="tab-label">Review &amp; Submit</span>
+        </div>
+      </div>
+
+      <!-- ── STEP 1: Personal Info ── -->
+      <div class="form-section active" id="step1">
+        <h2 class="section-heading">Tell us about <em>yourself</em></h2>
+        <p class="section-sub">Start with your basic personal details. All information is kept strictly confidential.</p>
+
+        <div class="row">
+          <div class="field">
+            <label>First Name <span class="req">*</span></label>
+            <input type="text" id="firstName" placeholder="e.g. Sarah"/>
+            <span class="err-msg" id="err-firstName">Please enter your first name.</span>
+          </div>
+          <div class="field">
+            <label>Last Name <span class="req">*</span></label>
+            <input type="text" id="lastName" placeholder="e.g. Nakato"/>
+            <span class="err-msg" id="err-lastName">Please enter your last name.</span>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="field">
+            <label>Date of Birth <span class="req">*</span></label>
+            <input type="date" id="dob"/>
+            <span class="err-msg" id="err-dob">Please enter your date of birth.</span>
+          </div>
+          <div class="field">
+            <label>Gender</label>
+            <select id="gender">
+              <option value="">Prefer not to say</option>
+              <option>Male</option>
+              <option>Female</option>
+              <option>Other</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Email Address <span class="req">*</span></label>
+          <input type="email" id="email" placeholder="your@email.com"/>
+          <span class="err-msg" id="err-email">Please enter a valid email address.</span>
+        </div>
+
+        <div class="row">
+          <div class="field">
+            <label>Phone / WhatsApp</label>
+            <input type="tel" id="phone" placeholder="+256 700 000 000"/>
+          </div>
+          <div class="field">
+            <label>Nationality <span class="req">*</span></label>
+            <input type="text" id="nationality" placeholder="e.g. Ugandan, British, American"/>
+            <span class="err-msg" id="err-nationality">Please enter your nationality.</span>
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Current City &amp; Country <span class="req">*</span></label>
+          <input type="text" id="location" placeholder="e.g. Kampala, Uganda  /  London, UK"/>
+          <span class="err-msg" id="err-location">Please enter your city and country.</span>
+        </div>
+
+        <div class="field">
+          <label>Upload a Photo <span style="color:#AAA;font-weight:400">(optional)</span></label>
+          <div class="photo-upload" id="photoUpload">
+            <input type="file" accept="image/*" onchange="previewPhoto(event)"/>
+            <div class="upload-icon">📷</div>
+            <p><strong>Click to upload</strong> a recent photo of yourself<br/>JPG, PNG · Max 5MB</p>
+            <div class="photo-preview" id="photoPreview"><img id="photoImg" src="" alt="Preview"/></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── STEP 2: Volunteer Details ── -->
+      <div class="form-section" id="step2">
+        <h2 class="section-heading">Your <em>volunteer</em> preferences</h2>
+        <p class="section-sub">Help us match you with the right role and time frame for your visit.</p>
+
+        <div class="field">
+          <label>Which area(s) would you like to volunteer in? <span class="req">*</span></label>
+          <span class="err-msg" id="err-roles">Please select at least one role.</span>
+          <div class="checkbox-grid" id="rolesGroup">
+            <div class="checkbox-item" onclick="toggleCheck(this)">
+              <input type="checkbox" value="Teaching & Tutoring"/>
+              <span class="box">✓</span> Teaching &amp; Tutoring
+            </div>
+            <div class="checkbox-item" onclick="toggleCheck(this)">
+              <input type="checkbox" value="Childcare & Mentoring"/>
+              <span class="box">✓</span>  Childcare &amp; Mentoring
+            </div>
+            <div class="checkbox-item" onclick="toggleCheck(this)">
+              <input type="checkbox" value="Healthcare & Medical"/>
+              <span class="box">✓</span>  Healthcare &amp; Medical
+            </div>
+            <div class="checkbox-item" onclick="toggleCheck(this)">
+              <input type="checkbox" value="Vocational & Trades"/>
+              <span class="box">✓</span>  Vocational &amp; Trades
+            </div>
+            <div class="checkbox-item" onclick="toggleCheck(this)">
+              <input type="checkbox" value="Music, Art & Sports"/>
+              <span class="box">✓</span>  Music, Art &amp; Sports
+            </div>
+            <div class="checkbox-item" onclick="toggleCheck(this)">
+              <input type="checkbox" value="Admin, IT & Remote"/>
+              <span class="box">✓</span>  Admin, IT &amp; Remote
+            </div>
+          </div>
+        </div>
+
+        <div class="field">
+          <label>How long can you volunteer? <span class="req">*</span></label>
+          <span class="err-msg" id="err-duration">Please select a duration.</span>
+          <div class="radio-group" id="durationGroup">
+            <label class="radio-item" onclick="selectRadio(this, 'durationGroup')">
+              <input type="radio" name="duration" value="1-2 weeks"/>
+              <span class="radio-dot"></span>
+              <div class="radio-label"><strong>1–2 Weeks</strong><span>Short visit — great for teachers, childcare, creative arts</span></div>
+            </label>
+            <label class="radio-item" onclick="selectRadio(this, 'durationGroup')">
+              <input type="radio" name="duration" value="3-4 weeks"/>
+              <span class="radio-dot"></span>
+              <div class="radio-label"><strong>3–4 Weeks</strong><span>Medium-term — you'll really get to know the children</span></div>
+            </label>
+            <label class="radio-item" onclick="selectRadio(this, 'durationGroup')">
+              <input type="radio" name="duration" value="1-3 months"/>
+              <span class="radio-dot"></span>
+              <div class="radio-label"><strong>1–3 Months</strong><span>Ideal for medical, vocational and educational volunteers</span></div>
+            </label>
+            <label class="radio-item" onclick="selectRadio(this, 'durationGroup')">
+              <input type="radio" name="duration" value="3-6 months"/>
+              <span class="radio-dot"></span>
+              <div class="radio-label"><strong>3–6 Months</strong><span>Deep impact — become a real part of our community</span></div>
+            </label>
+            <label class="radio-item" onclick="selectRadio(this, 'durationGroup')">
+              <input type="radio" name="duration" value="Remote only"/>
+              <span class="radio-dot"></span>
+              <div class="radio-label"><strong>Remote / Online Only</strong><span>Admin, IT, grant writing, social media — from anywhere</span></div>
+            </label>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="field">
+            <label>Earliest Start Date</label>
+            <input type="date" id="startDate"/>
+          </div>
+          <div class="field">
+            <label>Highest Qualification</label>
+            <select id="qualification">
+              <option value="">Select...</option>
+              <option>Certificate / Diploma</option>
+              <option>Bachelor's Degree</option>
+              <option>Master's Degree</option>
+              <option>PhD / Doctorate</option>
+              <option>Professional Certification</option>
+              <option>Secondary / High School</option>
+              <option>Other</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Relevant Skills &amp; Experience <span class="req">*</span></label>
+          <textarea id="skills" placeholder="Tell us about your background, qualifications, and any relevant experience. For example: '5 years primary school teaching in Uganda', 'Registered nurse with paediatric experience', 'IT support and web development'..."></textarea>
+          <span class="err-msg" id="err-skills">Please tell us a little about your skills.</span>
+        </div>
+
+        <div class="field">
+          <label>Why do you want to volunteer with Light &amp; Glory? <span class="req">*</span></label>
+          <textarea id="motivation" placeholder="Share what motivates you to serve — your faith, a calling, a desire to give back, or a specific connection to the mission..."></textarea>
+          <span class="err-msg" id="err-motivation">Please share your motivation.</span>
+        </div>
+
+        <div class="field">
+          <label>Do you have any previous volunteer experience?</label>
+          <textarea id="prevExperience" placeholder="Where, when, and what did you do? (optional)"></textarea>
+        </div>
+      </div>
+
+      <!-- ── STEP 3: Review & Submit ── -->
+      <div class="form-section" id="step3">
+        <h2 class="section-heading"><em>Review</em> your application</h2>
+        <p class="section-sub">Please check your details below before submitting. You can go back to make any changes.</p>
+
+        <div id="reviewBox" style="background:#F8F8F8; border-radius:10px; padding:24px; margin-bottom:28px; font-size:0.9rem; line-height:1.9; color:#444;">
+          <!-- filled by JS -->
+        </div>
+
+        <div class="agree-row">
+          <input type="checkbox" id="agreeCheck"/>
+          <label for="agreeCheck">I confirm that the information I have provided is accurate and truthful. I understand that Light &amp; Glory will contact me to discuss my application and that my details will not be shared with third parties.</label>
+        </div>
+
+        <div class="agree-row" style="border-color:#D0E8F5; background:#F0FAFF;">
+          <input type="checkbox" id="prayerCheck"/>
+          <label for="prayerCheck">I would like the Light &amp; Glory team to pray for me as I prepare to serve. 🙏</label>
+        </div>
+      </div>
+
+      <!-- FORM NAV -->
+      <div class="form-nav">
+        <button class="btn btn-ghost" id="backBtn" onclick="goBack()" style="display:none">← Back</button>
+        <span class="step-counter" id="stepCounter">Step 1 of 3</span>
+        <button class="btn btn-sky" id="nextBtn" onclick="goNext()">Next Step →</button>
+        <button class="btn btn-gold" id="submitBtn" style="display:none" onclick="submitForm()">Submit Application ✦</button>
+      </div>
+
+    </div><!-- /form-card -->
+
+    <div class="scripture">
+      <p>"Serve wholeheartedly, as if you were serving the Lord, not people."</p>
+      <cite> Ephesians 6:7</cite>
+    </div>
+  </div>
+
+</div><!-- /page-wrap -->
+
+</body>
+</html>
