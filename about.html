@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>About Us — Light & Glory Transformation Ministries</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Lato:ital,wght@0,300;0,400;0,700;1,300&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="about.css"/>
+  <script src="about.js" defer></script>
+</head>
+<body>
+ <div id="scroll-progress"></div>
+<!-- ===== NAVBAR ===== -->
+<nav class="navbar" id="navbar">
+  <a href="#" class="logo">
+    <div class="logo-img-wrap">
+      <!-- Replace src with your actual logo path -->
+      <img src="lightandglorylogo.png" alt="Light and Glory Transformation Ministries Logo" class="logo-img">
+    </div>
+    <div class="logo-text">
+      <span class="logo-name">Light <em>&</em> Glory</span>
+      <span class="logo-sub">Orphanage School Namutumba</span>
+    </div>
+  </a>
+
+  <ul class="nav-links">
+    <li><a href="index.html" class="active">Home</a></li>
+    <li><a href="about.html">About Us</a></li>
+    <li><a href="sermons.html">Sermons</a></li>
+    <li><a href="contact.html">Contact</a></li>
+    <li><a href="donate.html" class="btn-donate">Give</a></li>
+  </ul>
+
+  <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- Backdrop (dims page behind drawer) -->
+<div class="drawer-backdrop" id="drawerBackdrop" onclick="closeMenu()"></div>
+
+<!-- Side Drawer -->
+<div class="mobile-nav" id="mobileNav" role="navigation" aria-label="Mobile navigation">
+  <div class="drawer-header">
+    <div class="drawer-logo">
+      <strong>Light & Glory</strong>
+      Orphanage School Namutumba
+    </div>
+    <button class="mobile-nav-close" onclick="closeMenu()" aria-label="Close menu"></button>
+  </div>
+
+  <div class="drawer-links">
+    <a href="index.html" onclick="closeMenu()">Home</a>
+    <a href="about.html" onclick="closeMenu()">About Us</a>
+    <a href="sermons.html" onclick="closeMenu()">Sermons</a>
+    <a href="contact.html" onclick="closeMenu()">Contact</a>
+    <a href="donate.html" class="m-donate" onclick="closeMenu()">Give / Donate</a>
+  </div>
+</div>
+  <!-- HERO -->
+  <section class="hero">
+    <img class="hero-img" src="light1.jpeg" alt="Light and Glory Children">
+    <div class="hero-overlay"></div>
+    <div class="hero-fade"></div>
+    <div class="hero-content">
+      
+      <div class="hero-eyebrow reveal">Light & Glory Orphanage School</div>
+      <h1 class="hero-title reveal"> <em>About Us<br></em></h1>
+      <p class="hero-sub reveal">Transforming lives through love, faith and education</p>
+    </div>
+  </section>
+
+  <!-- STORY -->
+  <section class="story">
+    <div class="story-img">
+      <img src="light2.jpeg" alt="Our Story">
+    </div>
+    <div class="story-text">
+      <div class="eyebrow gold reveal">Our Story</div>
+      <h2 class="sec-title reveal">How Light & Glory <span>Began</span></h2>
+      <p class="body-txt reveal">Light & Glory Transformation Ministries was born out of one person's refusal to look away. In 2008, our founder walked through the villages of Namutumba and encountered children sleeping in the streets — malnourished, orphaned and without hope.</p>
+      <p class="body-txt reveal">With nothing more than faith and a rented room, the home opened its doors to the first five children. What began as a single room is today a thriving children's home and primary school serving over 80 children.</p>
+      <blockquote class="story-quote reveal">
+        <p>"Every child that walks through our gate carries a wound. Our job is to make sure they leave carrying a dream."</p>
+        <cite>— Founder, Light & Glory Transformation Ministries</cite>
+      </blockquote>
+    </div>
+  </section>
+
+  <!-- MISSION & VISION -->
+  <section class="mv-wrap">
+    <img class="mv-bg-img" src="light3.jpeg" alt="Mission background">
+    <div class="mv-overlay"></div>
+    <div class="mv-inner">
+      <div class="eyebrow white reveal">Our Purpose</div>
+      <h2 class="sec-title light reveal">Mission & <span>Vision</span></h2>
+      <div class="mv-grid">
+        <div class="mv-card mission reveal">
+          <div class="mv-icon">🕊️</div>
+          <h3>Our Mission</h3>
+          <p>To be hope to those without help through generosity, empower and train leaders for generation to come; preach the Gospel of Our Lord Jesus Christ to all.</p>
+        </div>
+        <div class="mv-card vision reveal">
+          <div class="mv-icon">🌟</div>
+          <h3>Our Vision</h3>
+          <p>To make all men practically, through experience for themselves the love of Christ which far supasses mere human knowledge without experience.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CORE VALUES -->
+  <section class="values-wrap"style="background-color:lightgray;"> >
+    
+    <div class="values-content">
+      <div class="values-header">
+        <div class="eyebrow reveal">What Guides Us</div>
+        <h2 class="sec-title reveal">Our Core <span>Values</span></h2>
+      </div>
+      <div class="values-grid">
+        <div class="val-card">
+          <div class="val-num">01</div>
+          <div class="val-icon"></div>
+          <h4>Capable</h4>
+          <p style="color:black;">We are efficient and suitable to perform all our duties</p>
+        </div>
+        <div class="val-card">
+          <div class="val-num">02</div>
+          <div class="val-icon"></div>
+          <h4>Apt</h4>
+          <p style="color:black;">We are keenly intelligent and responsive to needs of others</p>
+        </div>
+        <div class="val-card">
+          <div class="val-num">03</div>
+          <div class="val-icon"></div>
+          <h4>Readiness</h4>
+          <p style="color:black;">We are prepared for immediate use and willing disposed to help</p>
+        </div>
+        <div class="val-card">
+          <div class="val-num">04</div>
+          <div class="val-icon"></div>
+          <h4>Excel</h4>
+          <p style="color:black;">We are distinguishable and advantageous with betterness in accurance and team work</p>
+        </div>
+       
+      </div>
+    </div>
+  </section>
+
+  <!-- FOUNDER -->
+  <section class="team-section">
+
+    <div class="section-header">
+      <div class="eyebrow reveal">Our Team</div>
+      <h2 class="reveal">The People Behind the <span>Mission</span></h2>
+      <p class="reveal">Dedicated servants who have given their lives to the children of Light & Glory Orphanage School.</p>
+      <div class="divider"></div>
+    </div>
+
+    <div class="team-grid">
+
+      <!-- Card 1 – Founder (featured) -->
+      <div class="team-card featured reveal">
+        <div class="img-wrap">
+          <img src="light6.jpeg" alt="Founder" class="team-img">
+          <span class="role-badge">Founder</span>
+        </div>
+        <div class="team-info">
+          <div class="team-name">Bishop/Dr.Kenneth Bamuleke</div>
+          <div class="team-role">Founder & Executive Director</div>
+          <div class="team-bio">Born in eastern Uganda, our founder established Light & Glory in 2008 with five children and a rented room — now a registered home and school known for love, discipline and excellence.</div>
+          
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="team-card reveal">
+        <div class="img-wrap">
+          <img src="team2.jpeg" alt="Deputy Director" class="team-img">
+          <span class="role-badge">Leadership</span>
+        </div>
+        <div class="team-info">
+          <div class="team-name">Counsel David Bamuleke</div>
+          <div class="team-role">Deputy Director</div>
+          <div class="team-bio">Overseeing day-to-day operations, Counsel David Bamuleke ensures every child receives the attention, education, and love they deserve. A cornerstone of the home since its early years.</div>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="team-card reveal">
+        <div class="img-wrap">
+          <img src="team3.jpeg" alt="Head Teacher" class="team-img">
+          <span class="role-badge">Education</span>
+        </div>
+        <div class="team-info">
+          <div class="team-name">[Team Member 3]</div>
+          <div class="team-role">Head Teacher</div>
+          <div class="team-bio">Leading our primary school with passion and patience, [Name] has helped hundreds of children discover the joy of learning and build a foundation for a brighter future.</div>
+        </div>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="team-card reveal">
+        <div class="img-wrap">
+          <img src="team4.jpeg" alt="Outreach Coordinator" class="team-img">
+          <span class="role-badge">Outreach</span>
+        </div>
+        <div class="team-info">
+          <div class="team-name">[Team Member 4]</div>
+          <div class="team-role">Community Outreach Coordinator</div>
+          <div class="team-bio">Bridging the home with Namutumba district, [Name] identifies vulnerable children and families and connects them to the support they need.</div>
+        </div>
+      </div>
+
+      <!-- Card 5 – centered -->
+      <div class="team-card card-center reveal">
+        <div class="img-wrap">
+          <img src="team5.jpeg" alt="House Mother" class="team-img">
+          <span class="role-badge">Care</span>
+        </div>
+        <div class="team-info">
+          <div class="team-name">[Team Member 5]</div>
+          <div class="team-role">Caregiver & House Mother</div>
+          <div class="team-bio">The warm heart of our home, [Name] provides daily nurturing, comfort, and spiritual guidance that makes Light & Glory feel like a true family to every child.</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- TIMELINE -->
+  <section class="tl-section">
+    <div class="tl-left">
+      <div class="eyebrow reveal">Our Journey</div>
+      <h2 class="sec-title reveal">Key <span>Milestones</span></h2>
+      <div class="timeline">
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-year">2012</div>
+          <h4>The Home is Founded</h4>
+          <p>Light & Glory opens its doors to the first five children in a rented room in Namutumba. The journey begins with faith and love.</p>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-year">2014</div>
+          <h4>First Permanent Building</h4>
+          <p>With donor support, the first permanent structure is built — a dormitory and dining hall for 25 children.</p>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-year">2016</div>
+          <h4>Primary School Established</h4>
+          <p>Light & Glory Primary School is registered and begins classes, ensuring every child gets quality education on site.</p>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-year">2017</div>
+          <h4>First PLE Candidates</h4>
+          <p>Our first Primary Seven class sits the national PLE examinations. All pupils pass — two achieve First Grade.</p>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-year">2019</div>
+          <h4>Medical Clinic Opened</h4>
+          <p>A basic clinic is established on the grounds, providing free healthcare to children and vulnerable families nearby.</p>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-year">2022</div>
+          <h4>80 Children in Care</h4>
+          <p>The home reaches a milestone — 80 children in full-time care, with 30+ alumni now in secondary school and beyond.</p>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-year">2024</div>
+          <h4>New Classroom Block</h4>
+          <p>A new four-classroom block is completed, giving children modern learning spaces for years to come.</p>
+        </div>
+      </div>
+    </div>
+   
+  </section>
+
+  <!-- GALLERY -->
+  <section class="gallery-wrap">
+    <div class="gallery-inner">
+
+      <div class="eyebrow reveal">Photos</div>
+      <h2 class="sec-title reveal">Our Home & <span>Grounds</span></h2>
+      <p class="body-txt reveal">A glimpse into daily life at Light & Glory — classrooms, meals, play, worship and the smiles that make every day worthwhile.</p>
+      <div class="divider"></div>
+
+      <!-- Toggle Button -->
+      <button class="gallery-toggle-btn" id="galleryBtn" onclick="toggleGallery()">
+        <span class="btn-icon">+</span>
+        <span class="btn-label">View Photo Gallery</span>
+        <span class="btn-count"></span>
+      </button>
+
+      <!-- Collapsible Gallery -->
+      <div class="gallery-collapsible" id="galleryCollapsible">
+
+        <div class="gallery-grid">
+
+          <div class="g-item reveal" onclick="openLightbox(0)">
+            <img src="light1.jpeg" alt="Children" loading="lazy">
+            <div class="g-overlay">
+              <div class="g-cap">Our Children</div>
+              <div class="g-zoom">🔍</div>
+            </div>
+          </div>
+
+          <div class="g-item reveal" onclick="openLightbox(1)">
+            <img src="light2.jpeg" alt="Classroom" loading="lazy">
+            <div class="g-overlay">
+              <div class="g-cap">Learning Together</div>
+              <div class="g-zoom">🔍</div>
+            </div>
+          </div>
+
+          <div class="g-item reveal" onclick="openLightbox(2)">
+            <img src="light3.jpeg" alt="Lake Trip" loading="lazy">
+            <div class="g-overlay">
+              <div class="g-cap">Lake Victoria Trip</div>
+              <div class="g-zoom">🔍</div>
+            </div>
+          </div>
+
+          <div class="g-item reveal" onclick="openLightbox(3)">
+            <img src="light4.jpeg" alt="Worship" loading="lazy">
+            <div class="g-overlay">
+              <div class="g-cap">Sunday Worship</div>
+              <div class="g-zoom">🔍</div>
+            </div>
+          </div>
+
+          <div class="g-item reveal" onclick="openLightbox(4)">
+            <img src="light5.jpeg" alt="Sports Day" loading="lazy">
+            <div class="g-overlay">
+              <div class="g-cap">Annual Sports Day</div>
+              <div class="g-zoom">🔍</div>
+            </div>
+          </div>
+
+          <div class="g-item reveal" onclick="openLightbox(5)">
+            <img src="light6.jpeg" alt="Celebration" loading="lazy">
+            <div class="g-overlay">
+              <div class="g-cap">Celebrations</div>
+              <div class="g-zoom">🔍</div>
+            </div>
+          </div>
+
+          <div class="g-item reveal" onclick="openLightbox(6)">
+            <img src="light7.jpeg" alt="Meal Time" loading="lazy">
+            <div class="g-overlay">
+              <div class="g-cap">Meal Time Together</div>
+              <div class="g-zoom">🔍</div>
+            </div>
+          </div>
+
+          <div class="g-item reveal" onclick="openLightbox(7)">
+            <img src="light1.jpeg" alt="Playground" loading="lazy">
+            <div class="g-overlay">
+              <div class="g-cap">Playtime & Joy</div>
+              <div class="g-zoom">🔍</div>
+            </div>
+          </div>
+
+          <div class="g-item reveal" onclick="openLightbox(8)">
+            <img src="light2.jpeg" alt="Graduation" loading="lazy">
+            <div class="g-overlay">
+              <div class="g-cap">Graduation Day</div>
+              <div class="g-zoom">🔍</div>
+            </div>
+          </div>
+
+          <div class="g-item reveal" onclick="openLightbox(9)">
+            <img src="light3.jpeg" alt="Prayer" loading="lazy">
+            <div class="g-overlay">
+              <div class="g-cap">Morning Devotion</div>
+              <div class="g-zoom">🔍</div>
+            </div>
+          </div>
+
+          <div class="g-item reveal" onclick="openLightbox(10)">
+            <img src="light4.jpeg" alt="Garden" loading="lazy">
+            <div class="g-overlay">
+              <div class="g-cap">Our School Garden</div>
+              <div class="g-zoom">🔍</div>
+            </div>
+          </div>
+
+          <div class="g-item reveal" onclick="openLightbox(11)">
+            <img src="light5.jpeg" alt="Community" loading="lazy">
+            <div class="g-overlay">
+              <div class="g-cap">Community Day</div>
+              <div class="g-zoom">🔍</div>
+            </div>
+          </div>
+
+        </div><!-- /gallery-grid -->
+
+        <div class="gallery-close-row">
+          <button class="gallery-close-btn" onclick="toggleGallery()">✕ Hide Gallery</button>
+        </div>
+
+      </div><!-- /gallery-collapsible -->
+    </div>
+  </section>
+
+  <!-- ── Lightbox ── -->
+  <div class="lightbox" id="lightbox" onclick="closeLightboxOutside(event)">
+    <button class="lb-close" onclick="closeLightbox()">✕</button>
+    <button class="lb-prev" onclick="changeImage(-1)">&#8592;</button>
+    <button class="lb-next" onclick="changeImage(1)">&#8594;</button>
+    <div class="lb-content">
+      <img src="" alt="" id="lbImg">
+      <div class="lb-caption" id="lbCaption"></div>
+      <div class="lb-counter" id="lbCounter"></div>
+    </div>
+  </div>
+
+ <!-- ── FOOTER ── -->
+<footer class="ft">
+  <div class="ft-top-bar"></div>
+  <div class="ft-main">
+
+    <div>
+      <div class="ft-badge">Est. 2012 · Namutumba, Uganda</div>
+      <div class="ft-brand-name">Light &amp; <em>Glory</em></div>
+      <div class="ft-brand-sub">Children's Home &amp; School</div>
+      <p class="ft-brand-desc">Transforming the lives</p>
+      <div class="ft-socials">
+        <a class="ft-social" href="#" title="Facebook">f</a>
+        <a class="ft-social" href="#" title="Instagram">in</a>
+        <a class="ft-social" href="#" title="YouTube">▶</a>
+        <a class="ft-social" href="#" title="WhatsApp">✉</a>
+      </div>
+    </div>
+
+    <div>
+      <div class="ft-col-title">Quick Links</div>
+      <ul class="ft-links">
+        <li><a href="#">Home</a></li>
+        <li><a href="#">About Us</a></li>
+        <li><a href="#">Our Programs</a></li>
+        <li><a href="#">The Children</a></li>
+        <li><a href="#">Gallery</a></li>
+        <li><a href="#">Our Team</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="ft-col-title">Get Involved</div>
+      <ul class="ft-links">
+        <li><a href="#">Donate Now</a></li>
+        <li><a href="#">Sponsor a Child</a></li>
+        <li><a href="#">Volunteer With Us</a></li>
+        <li><a href="#">Partner With Us</a></li>
+        
+      </ul>
+    </div>
+
+    <div>
+      <div class="ft-col-title">Contact Us</div>
+      <div class="ft-contact-item">
+        <div class="ft-contact-icon">📍</div>
+        <div class="ft-contact-text">
+          <strong>Address</strong>
+          Namutumba District,<br>Eastern Uganda
+        </div>
+      </div>
+      <div class="ft-contact-item">
+        <div class="ft-contact-icon">✉</div>
+        <div class="ft-contact-text">
+          <strong>Email</strong>
+          info@lightandglory.org
+        </div>
+      </div>
+      <div class="ft-contact-item">
+        <div class="ft-contact-icon">📞</div>
+        <div class="ft-contact-text">
+          <strong>Phone</strong>
+          +256 700 000 000
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="ft-divider"></div>
+
+  <div class="ft-bottom">
+    <p class="ft-copy">© 2026 Light &amp; Glory Children's Home. Made with <span>♥</span> in Uganda.</p>
+    <div class="ft-bottom-links">
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms</a>
+      <a href="#">Contact</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
