@@ -599,7 +599,7 @@ h1.hero-title .sky { font-style: italic; color: #5dd8f0; }
 ══════════════════════════════ */
 .donate-parallax {
   position: relative;
-  background-image: url('light1.jpeg');
+  background-image: url('light7.jpeg');
   background-attachment: fixed;
   background-position: center;
   background-repeat: no-repeat;
@@ -649,7 +649,7 @@ h1.hero-title .sky { font-style: italic; color: #5dd8f0; }
 ══════════════════════════════ */
 .parallax-section {
   position: relative; height: 420px;
-  background-image: url('light7.jpeg');
+  background-image: url('lightandglorylogo.png');
   background-attachment: fixed;
   background-position: center;
   background-repeat: no-repeat;
