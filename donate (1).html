@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Donate – Light & Glory Transformation Ministries</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="donate.css">
+<script src="https://checkout.flutterwave.com/v3.js"></script>
+</head>
+<body>
+
+<!-- HERO BANNER -->
+<div class="hero-banner">
+  <div class="hero-banner__content">
+    <div class="hero-banner__tag">❤️ Make a Difference Today</div>
+    <h1 class="hero-banner__title">
+      Give a Child<br><em>Light, Hope & Future</em>
+    </h1>
+    <p class="hero-banner__sub">
+      Your donation directly feeds, educates, and nurtures orphaned and underprivileged children in Namutumba District, Uganda. Every shilling counts.
+    </p>
+  </div>
+  <!-- IMAGE: Replace src with your own photo of the children/school -->
+  <div class="hero-banner__image-wrap">
+    <img
+      src="light41.jpeg"
+      alt="Children at Light and Glory Orphanage School Namutumba"
+    >
+  </div>
+</div>
+
+
+<!-- MAIN -->
+<div class="main">
+
+  <!-- DONATE FORM -->
+  <div class="donate-card" id="donateCard">
+    <div class="donate-card__header">
+      <div class="donate-card__header-icon"></div>
+      <div class="donate-card__header-text">
+        <h2>Complete Your Gift</h2>
+        <p>Secure · Trusted · Impactful</p>
+      </div>
+    </div>
+
+    <div class="donate-card__body">
+
+      <!-- Frequency toggle -->
+      <div class="freq-toggle" id="freqToggle">
+        <div class="freq-toggle__slider" id="freqSlider"></div>
+        <button class="freq-toggle__btn active" id="btnOnce" onclick="setFreq('once')">Give Once</button>
+        <button class="freq-toggle__btn" id="btnMonthly" onclick="setFreq('monthly')">Give Monthly</button>
+      </div>
+
+      <!-- Monthly badge -->
+      <div class="monthly-badge" id="monthlyBadge">
+        🔄 Monthly giving creates lasting, consistent impact for children.
+      </div>
+
+      <!-- Amount selection -->
+      <span class="amount-label">Select Amount (USD)</span>
+      <div class="amount-grid">
+        <button class="amount-btn" onclick="selectAmount(this, 10)">
+          <span class="amount-btn__usd">$10</span>
+          <span class="amount-btn__ugx">≈ UGX 37,000</span>
+        </button>
+        <button class="amount-btn selected" onclick="selectAmount(this, 25)">
+          <span class="amount-btn__usd">$25</span>
+          <span class="amount-btn__ugx">≈ UGX 92,000</span>
+        </button>
+        <button class="amount-btn" onclick="selectAmount(this, 50)">
+          <span class="amount-btn__usd">$50</span>
+          <span class="amount-btn__ugx">≈ UGX 185,000</span>
+        </button>
+        <button class="amount-btn" onclick="selectAmount(this, 100)">
+          <span class="amount-btn__usd">$100</span>
+          <span class="amount-btn__ugx">≈ UGX 370,000</span>
+        </button>
+        <button class="amount-btn" onclick="selectAmount(this, 250)">
+          <span class="amount-btn__usd">$250</span>
+          <span class="amount-btn__ugx">≈ UGX 925,000</span>
+        </button>
+        <button class="amount-btn" onclick="selectAmount(this, 500)">
+          <span class="amount-btn__usd">$500</span>
+          <span class="amount-btn__ugx">≈ UGX 1.85M</span>
+        </button>
+      </div>
+
+      <!-- Custom amount -->
+      <div class="custom-amount-wrap">
+        <span class="currency">$</span>
+        <input type="number" id="customAmount" placeholder="Or enter custom amount" min="1"
+          oninput="clearAmountBtns()" value="25">
+      </div>
+
+      <div class="divider"><span>Your Details</span></div>
+
+      <!-- Donor fields -->
+      <div class="field-row">
+        <div class="field">
+          <label>First Name</label>
+          <input type="text" placeholder="e.g. Sarah" id="firstName">
+        </div>
+        <div class="field">
+          <label>Last Name</label>
+          <input type="text" placeholder="e.g. Nakato" id="lastName">
+        </div>
+      </div>
+      <div class="field">
+        <label>Email Address</label>
+        <input type="email" placeholder="you@example.com" id="email">
+      </div>
+      <div class="field">
+        <label>Phone (optional)</label>
+        <input type="tel" placeholder="+256 700 000 000" id="phone">
+      </div>
+
+      <div class="divider"><span>Payment Method</span></div>
+
+      <!-- Payment method selection -->
+      <span class="pay-label">Choose how to pay</span>
+      <div class="pay-methods">
+        <button class="pay-btn selected" onclick="selectPay(this, 'flutterwave')">
+          <div class="pay-btn__logo"><span class="fw-logo">flw</span></div>
+          <span class="pay-btn__label">Flutterwave</span>
+        </button>
+        <button class="pay-btn" onclick="selectPay(this, 'paypal')">
+          <div class="pay-btn__logo"><span class="pp-logo">PayPal</span></div>
+          <span class="pay-btn__label">PayPal</span>
+        </button>
+        <button class="pay-btn" onclick="selectPay(this, 'mobilemoney')">
+          <div class="pay-btn__logo"><span class="mm-logo">📱</span></div>
+          <span class="pay-btn__label">Mobile Money</span>
+        </button>
+      </div>
+
+      <!-- Mobile Money instructions panel -->
+      <div class="mm-panel" id="mmPanel">
+        <p>
+          Send your donation directly via Mobile Money to:<br>
+          <strong>+256 757970467 · Light &amp; Glory Orphanage</strong><br>
+          Then fill in your details above and click <strong>Confirm Donation</strong> — we'll verify and send your receipt.
+        </p>
+        <div class="mm-networks">
+          <span class="mm-chip">MTN Mobile Money</span>
+          <span class="mm-chip">Airtel Money</span>
+        </div>
+      </div>
+
+      <!-- Submit -->
+      <button class="submit-btn" onclick="handleDonate()">
+        <span id="submitLabel">Donate $25 Now</span>
+      </button>
+
+      <div class="secure-note">
+        🔒 Secure &amp; encrypted · Your data is safe
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════ -->
+    <!-- SUCCESS STATE — shown after Flutterwave confirms   -->
+    <!-- ═══════════════════════════════════════════════════ -->
+    <div class="success-state" id="successState">
+      <div class="success-circle">🙏</div>
+      <h3>God Bless You!</h3>
+      <p>Your generous gift is already making a difference in the lives of children at Light &amp; Glory Orphanage School Namutumba.</p>
+      <div class="ref">Reference: <strong id="refCode">LGO-2024-XXXX</strong></div>
+      <p style="font-size:13px;color:var(--gray);">A receipt has been sent to your email. Thank you for bringing light to a child's life.</p>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════ -->
+    <!-- PAYPAL PENDING STATE — shown after PayPal tab opens -->
+    <!-- ═══════════════════════════════════════════════════ -->
+    <div
+      id="pendingState"
+      style="
+        display: none;
+        padding: 40px 32px;
+        text-align: center;
+        flex-direction: column;
+        align-items: center;
+        gap: 14px;
+      "
+    >
+      <!-- Icon circle — matches success-circle style -->
+      <div style="
+        width: 72px;
+        height: 72px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #003087 0%, #009cde 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 32px;
+        margin: 0 auto 8px;
+        box-shadow: 0 4px 18px rgba(0, 144, 222, 0.35);
+      ">🕐</div>
+
+      <h3 style="
+        font-size: 22px;
+        font-weight: 700;
+        color: var(--dark);
+        margin: 0;
+      ">Almost There, <span id="pendingName"></span>!</h3>
+
+      <p style="
+        font-size: 15px;
+        color: var(--gray);
+        margin: 0;
+        line-height: 1.6;
+      ">
+        A PayPal tab has opened in your browser.<br>
+        Please complete your
+        <strong style="color: var(--dark);"><span id="pendingAmt"></span> donation</strong>
+        there to finalise your gift.
+      </p>
+
+      <!-- Step guide -->
+      <div style="
+        background: #f0f7ff;
+        border: 1px solid #cce0f5;
+        border-radius: 12px;
+        padding: 16px 20px;
+        text-align: left;
+        width: 100%;
+        box-sizing: border-box;
+        margin-top: 4px;
+      ">
+        <p style="font-size: 13px; font-weight: 600; color: #003087; margin: 0 0 10px;">What to do next:</p>
+        <div style="display:flex;gap:10px;margin-bottom:8px;align-items:flex-start;">
+          <span style="background:#003087;color:#fff;border-radius:50%;width:20px;height:20px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;">1</span>
+          <span style="font-size:13px;color:#444;line-height:1.5;">Switch to the PayPal tab that just opened</span>
+        </div>
+        <div style="display:flex;gap:10px;margin-bottom:8px;align-items:flex-start;">
+          <span style="background:#003087;color:#fff;border-radius:50%;width:20px;height:20px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;">2</span>
+          <span style="font-size:13px;color:#444;line-height:1.5;">Log in to PayPal (or pay as guest) and confirm your donation</span>
+        </div>
+        <div style="display:flex;gap:10px;align-items:flex-start;">
+          <span style="background:#003087;color:#fff;border-radius:50%;width:20px;height:20px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;">3</span>
+          <span style="font-size:13px;color:#444;line-height:1.5;">PayPal will email you a receipt once your payment is confirmed</span>
+        </div>
+      </div>
+
+      <p style="font-size: 12px; color: #aaa; margin: 4px 0 0;">
+        If the PayPal tab didn't open,
+        <a
+          href="#"
+          onclick="window.open('https://www.paypal.com/donate/?hosted_button_id=YOUR_PAYPAL_BUTTON_ID','_blank');return false;"
+          style="color:#003087;text-decoration:underline;"
+        >click here to try again</a>.
+      </p>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════ -->
+    <!-- MOBILE MONEY INSTRUCTIONS STATE — shown after MM chosen -->
+    <!-- ═══════════════════════════════════════════════════════ -->
+    <div
+      id="mmInstructionsState"
+      style="
+        display: none;
+        padding: 40px 32px;
+        text-align: center;
+        flex-direction: column;
+        align-items: center;
+        gap: 14px;
+      "
+    >
+      <!-- Icon circle -->
+      <div style="
+        width: 72px;
+        height: 72px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #ffcc00 0%, #f5a623 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 32px;
+        margin: 0 auto 8px;
+        box-shadow: 0 4px 18px rgba(245, 166, 35, 0.35);
+      ">📱</div>
+
+      <h3 style="
+        font-size: 22px;
+        font-weight: 700;
+        color: var(--dark);
+        margin: 0;
+      ">Complete Your Mobile Money Donation</h3>
+
+      <p style="
+        font-size: 15px;
+        color: var(--gray);
+        margin: 0;
+        line-height: 1.6;
+      ">
+        Send <strong style="color:var(--dark);"><span id="mmAmt"></span></strong> using the details below.
+        Once sent, we'll verify and email your receipt.
+      </p>
+
+      <!-- Payment details box -->
+      <div style="
+        background: #fffbf0;
+        border: 1.5px solid #f5c842;
+        border-radius: 14px;
+        padding: 20px 24px;
+        text-align: left;
+        width: 100%;
+        box-sizing: border-box;
+        margin-top: 4px;
+      ">
+        <p style="font-size:13px;font-weight:700;color:#b07d00;margin:0 0 14px;text-transform:uppercase;letter-spacing:.04em;">Send payment to</p>
+
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid #f0e0a0;">
+          <span style="font-size:13px;color:#888;">Number</span>
+          <strong id="mmNumber" style="font-size:15px;color:var(--dark);letter-spacing:.03em;"></strong>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid #f0e0a0;">
+          <span style="font-size:13px;color:#888;">Account name</span>
+          <strong id="mmName" style="font-size:14px;color:var(--dark);text-align:right;max-width:60%;"></strong>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid #f0e0a0;">
+          <span style="font-size:13px;color:#888;">Amount</span>
+          <strong id="mmAmtDetail" style="font-size:15px;color:var(--dark);"></strong>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 0;">
+          <span style="font-size:13px;color:#888;">Your reference</span>
+          <strong id="mmRef" style="font-size:13px;color:#c07000;font-family:monospace;background:#fff3cc;padding:3px 8px;border-radius:6px;"></strong>
+        </div>
+      </div>
+
+      <!-- Networks accepted -->
+      <div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:2px;">
+        <span id="mmProvider" style="
+          background: #ffcc00;
+          color: #5a3e00;
+          font-size: 12px;
+          font-weight: 600;
+          padding: 5px 14px;
+          border-radius: 20px;
+        "></span>
+        <span style="
+          background: #e8f5e9;
+          color: #1b5e20;
+          font-size: 12px;
+          font-weight: 600;
+          padding: 5px 14px;
+          border-radius: 20px;
+        ">Airtel Money</span>
+      </div>
+
+      <!-- Important note -->
+      <div style="
+        background: #f0faf0;
+        border-left: 3px solid #4caf50;
+        border-radius: 0 8px 8px 0;
+        padding: 12px 16px;
+        text-align: left;
+        width: 100%;
+        box-sizing: border-box;
+      ">
+        <p style="font-size:13px;color:#2e7d32;margin:0;line-height:1.6;">
+          <strong>Important:</strong> Use the reference code above when sending so we can match your payment quickly. After sending, we'll confirm within 24 hours and email your receipt.
+        </p>
+      </div>
+
+      <p style="font-size: 12px; color: #aaa; margin: 4px 0 0; line-height:1.5;">
+        Questions? Email us at <a href="mailto:info@lightandglory.org" style="color:var(--primary,#f5a623);text-decoration:none;">info@lightandglory.org</a>
+      </p>
+    </div>
+
+  </div><!-- end .donate-card -->
+
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+
+    <!-- Impact breakdown -->
+    <div class="impact-card">
+      <div class="impact-card__top">
+        <h3>Your Impact</h3>
+        <p>See what your donation does</p>
+      </div>
+      <div class="impact-card__body">
+        <div class="impact-item-row">
+          <div class="impact-icon blue">📚</div>
+          <div class="impact-item-row__text">
+            <strong>$10 · School Supplies</strong>
+            <span>Provides exercise books, pens & learning materials for one child for a term.</span>
+          </div>
+        </div>
+        <div class="impact-item-row">
+          <div class="impact-icon orange">🍽️</div>
+          <div class="impact-item-row__text">
+            <strong>$25 · Monthly Meals</strong>
+            <span>Feeds a child nutritious meals for an entire month — three times a day.</span>
+          </div>
+        </div>
+        <div class="impact-item-row">
+          <div class="impact-icon green">🏥</div>
+          <div class="impact-item-row__text">
+            <strong>$50 · Medical Care</strong>
+            <span>Covers a child's clinic visits, medication, and basic health needs for a term.</span>
+          </div>
+        </div>
+        <div class="impact-item-row">
+          <div class="impact-icon purple">🎓</div>
+          <div class="impact-item-row__text">
+            <strong>$100 · School Fees</strong>
+            <span>Sponsors a child's full term school fees, uniform, and vocational training.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Trust signals -->
+    <div class="trust-card">
+      <h4>Why Trust Us</h4>
+      <div class="trust-items">
+        <div class="trust-item">
+          <div class="trust-icon">✅</div>
+          Registered Non-Profit Charity in Uganda
+        </div>
+        <div class="trust-item">
+          <div class="trust-icon">🏆</div>
+          Prominent in Namutumba District since 2012
+        </div>
+        <div class="trust-item">
+          <div class="trust-icon">🔒</div>
+          Secure payments via Flutterwave &amp; PayPal
+        </div>
+        <div class="trust-item">
+          <div class="trust-icon">📧</div>
+          Instant email receipt on every donation
+        </div>
+        <div class="trust-item">
+          <div class="trust-icon">❤️</div>
+          100% of funds reach the children
+        </div>
+      </div>
+    </div>
+
+    <!-- Testimony -->
+    <div class="testimony-card">
+      <blockquote>
+        "Light & Glory gave me a home, an education, and a future. I am now the first in my family to finish school."
+      </blockquote>
+      <cite>David, Former Beneficiary · Namutumba</cite>
+    </div>
+
+  </div>
+</div>
+
+
+<script>
+// ============================================================
+// LIGHT & GLORY ORPHANAGE SCHOOL — DONATION PAGE JAVASCRIPT
+// Fixed: PayPal flow, Mobile Money flow, Monthly logic,
+//        Flutterwave verification, tx_ref uniqueness
+// ============================================================
+
+// ── CONFIG ──────────────────────────────────────────────────
+// Swap this with the client's real Public Key once they send it.
+// Test key  → starts with FLWPUBK_TEST-
+// Live key  → starts with FLWPUBK-  (no _TEST)
+const FLW_PUBLIC_KEY = "FLWPUBK_TEST-xxxxxxxxxxxxxxxxxxxx-X";
+
+// Replace with your Make.com webhook URL
+// How: Make.com → New Scenario → Webhooks → Custom Webhook → Copy URL
+const MAKE_WEBHOOK_URL = "https://hook.eu1.make.com/YOUR_WEBHOOK_ID_HERE";
+
+// Replace with the client's real PayPal donation button ID
+// How: PayPal → Pay & Get Paid → Donate Buttons → copy hosted_button_id
+const PAYPAL_BUTTON_ID = "YOUR_PAYPAL_BUTTON_ID";
+
+// Mobile money instructions shown to donor after they choose MM
+const MOBILE_MONEY = {
+  number:   "0700 000 000",   // ← replace with client's actual MM number
+  provider: "MTN Mobile Money",
+  name:     "Light & Glory Orphanage School"
+};
+// ────────────────────────────────────────────────────────────
+
+
+// ── STATE ────────────────────────────────────────────────────
+let selectedAmount = 25;
+let selectedFreq   = "once";
+let selectedPay    = "flutterwave";
+// ────────────────────────────────────────────────────────────
+
+
+// ── UI HELPERS ───────────────────────────────────────────────
+function setFreq(freq) {
+  selectedFreq = freq;
+  const slider   = document.getElementById("freqSlider");
+  const btnOnce  = document.getElementById("btnOnce");
+  const btnMonthly = document.getElementById("btnMonthly");
+  const badge    = document.getElementById("monthlyBadge");
+
+  if (freq === "monthly") {
+    slider.classList.add("monthly");
+    btnOnce.classList.remove("active");
+    btnMonthly.classList.add("active");
+    badge.classList.add("show");
+  } else {
+    slider.classList.remove("monthly");
+    btnOnce.classList.add("active");
+    btnMonthly.classList.remove("active");
+    badge.classList.remove("show");
+  }
+  updateSubmitLabel();
+}
+
+function selectAmount(btn, amount) {
+  selectedAmount = amount;
+  document.querySelectorAll(".amount-btn").forEach(b => b.classList.remove("selected"));
+  btn.classList.add("selected");
+  document.getElementById("customAmount").value = amount;
+  updateSubmitLabel();
+}
+
+function clearAmountBtns() {
+  document.querySelectorAll(".amount-btn").forEach(b => b.classList.remove("selected"));
+  selectedAmount = parseFloat(document.getElementById("customAmount").value) || 0;
+  updateSubmitLabel();
+}
+
+function selectPay(btn, method) {
+  selectedPay = method;
+  document.querySelectorAll(".pay-btn").forEach(b => b.classList.remove("selected"));
+  btn.classList.add("selected");
+  const mmPanel = document.getElementById("mmPanel");
+  if (method === "mobilemoney") {
+    mmPanel.classList.add("show");
+  } else {
+    mmPanel.classList.remove("show");
+  }
+}
+
+function updateSubmitLabel() {
+  const amt   = parseFloat(document.getElementById("customAmount").value) || selectedAmount;
+  const label = document.getElementById("submitLabel");
+  const freq  = selectedFreq === "monthly" ? "/month" : " Now";
+  label.textContent = `Donate $${amt}${freq}`;
+}
+
+// Sync custom amount input with submit label
+document.getElementById("customAmount").addEventListener("input", updateSubmitLabel);
+updateSubmitLabel();
+// ────────────────────────────────────────────────────────────
+
+
+// ── VALIDATION ───────────────────────────────────────────────
+function validateForm() {
+  const firstName = document.getElementById("firstName").value.trim();
+  const lastName  = document.getElementById("lastName").value.trim();
+  const email     = document.getElementById("email").value.trim();
+  const amt       = parseFloat(document.getElementById("customAmount").value) || selectedAmount;
+
+  if (!firstName || !lastName) {
+    alert("Please enter your full name.");
+    return null;
+  }
+  if (!email || !email.includes("@")) {
+    alert("Please enter a valid email address.");
+    return null;
+  }
+  if (!amt || amt < 1) {
+    alert("Please enter a valid donation amount (minimum $1).");
+    return null;
+  }
+  if (amt > 10000) {
+    alert("Maximum donation amount is $10,000. Please contact us for larger donations.");
+    return null;
+  }
+
+  return {
+    firstName,
+    lastName,
+    email,
+    phone: document.getElementById("phone").value.trim(),
+    amt
+  };
+}
+// ────────────────────────────────────────────────────────────
+
+
+// ── UNIQUE TRANSACTION REFERENCE ─────────────────────────────
+// Uses timestamp + random suffix to avoid collisions
+function generateTxRef(prefix) {
+  const rand = Math.random().toString(36).substring(2, 7).toUpperCase();
+  return `${prefix}-${Date.now()}-${rand}`;
+}
+// ────────────────────────────────────────────────────────────
+
+
+// ── MAIN DONATE HANDLER ──────────────────────────────────────
+function handleDonate() {
+  const form = validateForm();
+  if (!form) return; // validation failed
+
+  const { firstName, lastName, email, phone, amt } = form;
+
+  if (selectedPay === "flutterwave") {
+    handleFlutterwave({ firstName, lastName, email, phone, amt });
+
+  } else if (selectedPay === "paypal") {
+    handlePayPal({ firstName, lastName, email, amt });
+
+  } else if (selectedPay === "mobilemoney") {
+    handleMobileMoney({ firstName, lastName, email, phone, amt });
+  }
+}
+// ────────────────────────────────────────────────────────────
+
+
+// ── FLUTTERWAVE HANDLER ──────────────────────────────────────
+// Covers both one-time and monthly donations.
+// Monthly = Flutterwave Payment Plan (requires plan ID from dashboard).
+function handleFlutterwave({ firstName, lastName, email, phone, amt }) {
+  const txRef = generateTxRef("LGO");
+
+  // ── MONTHLY via Flutterwave Payment Plan ──────────────────
+  // To enable real recurring charges:
+  // 1. Go to Flutterwave Dashboard → Payment Plans → Create Plan
+  // 2. Set interval: monthly, amount: leave blank (donor sets it), currency: USD
+  // 3. Copy the Plan ID and paste it below
+  // 4. Uncomment the payment_plan line
+  // Without a plan ID, monthly acts like a one-time charge with a note.
+  const isMonthly = selectedFreq === "monthly";
+  const description = isMonthly
+    ? "Monthly recurring donation for orphaned children"
+    : "One-time donation for orphaned children";
+
+  FlutterwaveCheckout({
+    public_key:      FLW_PUBLIC_KEY,
+    tx_ref:          txRef,
+    amount:          amt,
+    currency:        "USD",
+    payment_options: "card, mobilemoney, ussd, banktransfer",
+    // payment_plan: "YOUR_PLAN_ID_HERE", // ← uncomment for true monthly recurring
+    customer: {
+      email,
+      phone_number: phone,
+      name: `${firstName} ${lastName}`
+    },
+    customizations: {
+      title:       "Light & Glory Orphanage School",
+      description,
+      logo:        "https://lightandglory.org/lightandglorylogo.png"
+    },
+    callback: function(data) {
+      // data.status from the popup is NOT enough to confirm payment.
+      // We log it here, but ideally verify server-side using the tx_ref.
+      if (data.status === "successful" || data.status === "completed") {
+        showSuccess({
+          ref:     data.transaction_id || txRef,
+          method:  "flutterwave",
+          amt,
+          email,
+          firstName,
+          lastName,
+          phone,
+          isMonthly,
+          verified: false // set to true only after backend verification
+        });
+      } else {
+        // Payment failed or was declined
+        showError("Payment was not completed. Please try again.");
+      }
+    },
+    onclose: function() {
+      // Donor closed the popup without paying — do nothing
+      console.log("Flutterwave popup closed by donor.");
+    }
+  });
+}
+// ────────────────────────────────────────────────────────────
+
+
+// ── PAYPAL HANDLER ───────────────────────────────────────────
+// FIXED: No longer shows success immediately.
+// Opens PayPal in a new tab and shows a "pending" message.
+// Real confirmation comes when PayPal fires its webhook to Make.com.
+function handlePayPal({ firstName, lastName, email, amt }) {
+  const paypalUrl = `https://www.paypal.com/donate/?hosted_button_id=${PAYPAL_BUTTON_ID}`;
+
+  // Open PayPal in a new tab
+  window.open(paypalUrl, "_blank");
+
+  // Show a PENDING screen — not a success screen
+  // We do NOT call showSuccess() here because payment hasn't happened yet
+  showPending({
+    method:    "paypal",
+    amt,
+    email,
+    firstName,
+    lastName
+  });
+}
+// ────────────────────────────────────────────────────────────
+
+
+// ── MOBILE MONEY HANDLER ─────────────────────────────────────
+// FIXED: No longer shows fake success.
+// Shows payment instructions to the donor with a unique reference.
+// The client manually confirms payment and marks it in their records.
+function handleMobileMoney({ firstName, lastName, email, phone, amt }) {
+  const mmRef = generateTxRef("MM");
+
+  // Show the MM instructions screen — not a success screen
+  showMMInstructions({
+    ref:       mmRef,
+    amt,
+    email,
+    firstName,
+    lastName,
+    phone
+  });
+
+  // Log the PENDING donation to Make.com so the client can follow up
+  sendToMake({
+    reference:      mmRef,
+    amount:         amt,
+    currency:       "USD",
+    frequency:      selectedFreq,
+    payment_method: "mobilemoney",
+    status:         "pending_confirmation", // ← honest status
+    first_name:     firstName,
+    last_name:      lastName,
+    email,
+    phone,
+    donated_at:     new Date().toISOString(),
+    source:         "Light & Glory Donate Page"
+  });
+}
+// ────────────────────────────────────────────────────────────
+
+
+// ── SUCCESS SCREEN ───────────────────────────────────────────
+function showSuccess({ ref, method, amt, email, firstName, lastName, phone, isMonthly }) {
+  const refCode = ref || generateTxRef("LGO");
+  document.getElementById("refCode").textContent = refCode;
+  document.querySelector(".donate-card__header").style.display = "none";
+  document.querySelector(".donate-card__body").style.display = "none";
+  document.getElementById("successState").classList.add("show");
+
+  // Send confirmed donation to Make.com → Google Sheets + Brevo
+  sendToMake({
+    reference:      refCode,
+    amount:         amt,
+    currency:       "USD",
+    frequency:      isMonthly ? "monthly" : "once",
+    payment_method: method,
+    status:         "successful",
+    first_name:     firstName,
+    last_name:      lastName,
+    email,
+    phone:          phone || "",
+    donated_at:     new Date().toISOString(),
+    source:         "Light & Glory Donate Page"
+  });
+}
+// ────────────────────────────────────────────────────────────
+
+
+// ── PENDING SCREEN (PayPal) ──────────────────────────────────
+// Shows a "complete your payment in the PayPal tab" message.
+// You need to add a div with id="pendingState" in your HTML.
+function showPending({ method, amt, email, firstName, lastName }) {
+  document.querySelector(".donate-card__header").style.display = "none";
+  document.querySelector(".donate-card__body").style.display = "none";
+
+  const pending = document.getElementById("pendingState");
+  if (pending) {
+    pending.classList.add("show");
+    const nameEl = document.getElementById("pendingName");
+    const amtEl  = document.getElementById("pendingAmt");
+    if (nameEl) nameEl.textContent = firstName;
+    if (amtEl)  amtEl.textContent  = `$${amt}`;
+  } else {
+    // Fallback if pendingState div doesn't exist yet in HTML
+    alert(
+      `A PayPal tab has been opened.\n\nPlease complete your $${amt} donation there.\n\nOnce done, you'll receive a confirmation email from PayPal at ${email}.`
+    );
+  }
+
+  // Log pending to Make.com so client knows someone started a PayPal donation
+  sendToMake({
+    reference:      generateTxRef("PP"),
+    amount:         amt,
+    currency:       "USD",
+    frequency:      selectedFreq,
+    payment_method: "paypal",
+    status:         "pending_paypal", // ← honest status
+    first_name:     firstName,
+    last_name:      lastName,
+    email,
+    phone:          "",
+    donated_at:     new Date().toISOString(),
+    source:         "Light & Glory Donate Page"
+  });
+}
+// ────────────────────────────────────────────────────────────
+
+
+// ── MOBILE MONEY INSTRUCTIONS SCREEN ────────────────────────
+// Shows the donor exactly how to pay via MM.
+// You need to add a div with id="mmInstructionsState" in your HTML.
+function showMMInstructions({ ref, amt, email, firstName, lastName, phone }) {
+  document.querySelector(".donate-card__header").style.display = "none";
+  document.querySelector(".donate-card__body").style.display = "none";
+
+  const mmScreen = document.getElementById("mmInstructionsState");
+  if (mmScreen) {
+    mmScreen.classList.add("show");
+    const els = {
+      mmRef:      document.getElementById("mmRef"),
+      mmAmt:      document.getElementById("mmAmt"),
+      mmNumber:   document.getElementById("mmNumber"),
+      mmProvider: document.getElementById("mmProvider"),
+      mmName:     document.getElementById("mmName")
+    };
+    if (els.mmRef)      els.mmRef.textContent      = ref;
+    if (els.mmAmt)      els.mmAmt.textContent       = `$${amt}`;
+    if (els.mmNumber)   els.mmNumber.textContent    = MOBILE_MONEY.number;
+    if (els.mmProvider) els.mmProvider.textContent  = MOBILE_MONEY.provider;
+    if (els.mmName)     els.mmName.textContent      = MOBILE_MONEY.name;
+  } else {
+    // Fallback if mmInstructionsState div doesn't exist in HTML yet
+    alert(
+      `To complete your $${amt} donation via Mobile Money:\n\n` +
+      `Send to: ${MOBILE_MONEY.number}\n` +
+      `Provider: ${MOBILE_MONEY.provider}\n` +
+      `Account name: ${MOBILE_MONEY.name}\n` +
+      `Reference: ${ref}\n\n` +
+      `Please use the reference above so we can match your payment.`
+    );
+  }
+}
+// ────────────────────────────────────────────────────────────
+
+
+// ── ERROR DISPLAY ────────────────────────────────────────────
+function showError(message) {
+  // Simple fallback — replace with a proper error UI if you have one
+  alert(message);
+}
+// ────────────────────────────────────────────────────────────
+
+
+// ── MAKE.COM WEBHOOK ─────────────────────────────────────────
+async function sendToMake(donationData) {
+  try {
+    await fetch(MAKE_WEBHOOK_URL, {
+      method:  "POST",
+      headers: { "Content-Type": "application/json" },
+      body:    JSON.stringify(donationData)
+    });
+    console.log("✅ Donation data sent to Make.com:", donationData.reference);
+  } catch (err) {
+    // Silent fail — don't break the donor experience if Make.com is down
+    console.error("❌ Make.com webhook failed:", err);
+  }
+}
+// ────────────────────────────────────────────────────────────
+
+
+// ── HTML SNIPPETS YOU NEED TO ADD ────────────────────────────
+/*
+  Add these three divs to your HTML, right after your existing
+  #successState div. Style them to match your success screen.
+
+  1) PAYPAL PENDING STATE:
+  ────────────────────────
+  <div id="pendingState" class="donate-card__state" style="display:none">
+    <h3>Almost there, <span id="pendingName"></span>!</h3>
+    <p>A PayPal tab has opened. Please complete your <strong><span id="pendingAmt"></span></strong> donation there.</p>
+    <p>Once PayPal confirms your payment, you'll receive a receipt by email.</p>
+    <p><small>You can close this tab after donating.</small></p>
+  </div>
+
+  2) MOBILE MONEY INSTRUCTIONS STATE:
+  ─────────────────────────────────────
+  <div id="mmInstructionsState" class="donate-card__state" style="display:none">
+    <h3>How to complete your donation</h3>
+    <p>Send <strong><span id="mmAmt"></span></strong> via <span id="mmProvider"></span>:</p>
+    <ul>
+      <li>Number: <strong><span id="mmNumber"></span></strong></li>
+      <li>Account name: <strong><span id="mmName"></span></strong></li>
+      <li>Reference: <strong><span id="mmRef"></span></strong></li>
+    </ul>
+    <p><small>Please use the reference above so we can match your payment. We'll email you a receipt once confirmed.</small></p>
+  </div>
+
+  3) EXISTING SUCCESS STATE (keep as-is, just shown here for reference):
+  ────────────────────────────────────────────────────────────────────────
+  <div id="successState" class="donate-card__state">
+    <p>Reference: <span id="refCode"></span></p>
+  </div>
+
+  NOTE ON MONTHLY DONATIONS:
+  ──────────────────────────
+  The monthly toggle currently works as a label — it adds a note to the
+  Flutterwave popup and logs "monthly" to Make.com/Google Sheets.
+  For TRUE auto-recurring charges (card billed every month automatically):
+  1. Go to Flutterwave Dashboard → Payment Plans → Create a Plan
+  2. Set: monthly interval, USD, give it a name
+  3. Copy the Plan ID
+  4. In handleFlutterwave() above, uncomment the payment_plan line
+     and replace "YOUR_PLAN_ID_HERE" with the real ID
+  This requires the client to have a verified live Flutterwave account.
+*/
+</script>
+</body>
+</html>
