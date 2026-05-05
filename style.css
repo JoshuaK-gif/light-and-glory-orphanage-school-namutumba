@@ -21,8 +21,8 @@
   --text-light:  #555;
   --muted:       rgba(14,14,14,0.52);
   --border:      #e0e0d8;
-  --nav-h:       76px;
-  --nav-h-sm:    52px;
+  --nav-h:       90px;
+  --nav-h-sm:    72px;
   --ease:        cubic-bezier(0.22,1,0.36,1);
   --transition:  all 0.38s cubic-bezier(0.22,1,0.36,1);
 }
@@ -38,8 +38,8 @@ html { scroll-behavior: smooth; }
 body {
   font-family: "Lato", 'Source Sans 3', sans-serif;
   background: var(--white);
-  color: var(--text);
-  font-size: 17px;
+  color: black;
+  font-size: 20pxpx;
   line-height: 1.7;
   overflow-x: hidden;
 }
@@ -106,11 +106,11 @@ body {
 }
 .logo-img-wrap {
   position: relative;
-  width: 54px; height: 54px;
+  width: 72px; height: 72px;
   flex-shrink: 0;
   transition: var(--transition);
 }
-.navbar.scrolled .logo-img-wrap { width: 38px; height: 38px; }
+.navbar.scrolled .logo-img-wrap { width: 70px; height: 70px; }
 .logo-img-wrap::after {
   content: "";
   position: absolute; inset: -3px;
@@ -150,7 +150,7 @@ body {
   display: inline-flex; align-items: center; gap: 6px;
   color: rgba(14,14,14,0.85); text-decoration: none;
   font-family: "Cinzel", serif;
-  font-size: 0.72rem; font-weight: 600;
+  font-size: 0.9rem; font-weight: bold;
   letter-spacing: 1.5px; text-transform: uppercase;
   padding: 8px 16px; border-radius: 2px;
   position: relative;
@@ -377,8 +377,8 @@ h1.hero-title {
 h1.hero-title em { font-style: italic; color: var(--gold-light); }
 h1.hero-title .sky { font-style: italic; color: #5dd8f0; }
 .hero-desc {
-  font-size: 17px; font-weight: 400;
-  line-height: 1.75; color: rgba(255,255,255,0.75);
+  font-size: 22px; font-weight: 400;
+  line-height: 1.75; color:#ffce85;
   max-width: 580px; margin-bottom: 14px;
   opacity: 0; animation: up 0.8s ease 0.4s forwards;
 }
@@ -537,7 +537,7 @@ h1.hero-title .sky { font-style: italic; color: #5dd8f0; }
   font-size: 1.9rem; color: var(--green-dark);
   margin-bottom: 16px; line-height: 1.25;
 }
-.featured-text p { color: var(--text-light); margin-bottom: 14px; }
+.featured-text p { color: black; margin-bottom: 14px; }
 
 /* ══════════════════════════════
    CARDS GRID
@@ -946,7 +946,7 @@ h1.hero-title .sky { font-style: italic; color: #5dd8f0; }
   .logo-sub { font-size: 0.5rem; letter-spacing: 2px; }
   .hero-content { padding: 100px 28px 60px; }
   h1.hero-title { font-size: 2.2rem; }
-  .hero-desc { font-size: 15px; }
+  .hero-desc { font-size: 17px; }
   .hero-stats { gap: 28px; }
   .stat-val { font-size: 32px; }
   .section { padding: 60px 24px; }
