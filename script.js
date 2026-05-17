@@ -103,8 +103,8 @@ document.addEventListener('DOMContentLoaded', function () {
 }); // end DOMContentLoaded
 function toggleCard(btn) {
   const content = btn.previousElementSibling;
-  const isHidden = content.style.display === 'none';
-  content.style.display = isHidden ? 'block' : 'none';
+  const isHidden = content.style.display === '';
+  content.style.display = isHidden ? 'block' : '';
   btn.textContent = isHidden ? 'Read Less' : 'Read More';
 }
 
@@ -165,4 +165,16 @@ modal.addEventListener('click', (e) => {
 
 document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape') closeModal();
-});
+  });
+
+  // ── Mobile Dropdown ──────────────────────────────────────────
+  function toggleMobileDropdown(e) {
+    e.preventDefault();
+    const toggle = e.currentTarget;
+    const content = toggle.nextElementSibling;
+
+    if (content && content.classList.contains('mobile-dropdown-content')) {
+      content.classList.toggle('open');
+      toggle.classList.toggle('active');
+    }
+  }

@@ -1,15 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
+  
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Light & Glory Orphanage School Namutumba</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet"/>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
- <link rel="stylesheet" href="style.css" />
- <script src="script.js" defer></script>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Lato:wght@300;400;700&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+  
+  <style>
+    /* Modern Read More Button Styles */
+    .toggle-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 18px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: #2563eb;
+      background: transparent;
+      border: 1.5px solid #2563eb;
+      border-radius: 6px;
+      text-decoration: none;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      margin-top: 12px;
+      letter-spacing: 0.3px;
+    }
+    
+    .toggle-btn::after {
+      content: '→';
+      font-size: 1rem;
+      transition: transform 0.3s ease;
+    }
+    
+    .toggle-btn:hover {
+      background: #2563eb;
+      color: white;
+      border-color: #2563eb;
+      transform: translateX(2px);
+      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+    }
+    
+    .toggle-btn:hover::after {
+      transform: translateX(3px);
+    }
+    
+    .toggle-btn:active {
+      transform: translateX(1px) scale(0.98);
+    }
+  </style>
+  
+  <script src="script.js" defer></script>
+
 </head>
 <body>
 
@@ -17,10 +61,9 @@
  <div id="scroll-progress"></div>
 <!-- ===== NAVBAR ===== -->
 <nav class="navbar" id="navbar">
-  <a href="#" class="logo">
+  <a href="index.html" class="logo">
     <div class="logo-img-wrap">
-      <!-- Replace src with your actual logo path -->
-      <img src="lightandglorylogo.png" alt="Light and Glory Transformation Ministries Logo" class="logo-img">
+      <img src="lightandglorylogo.png" alt="Light & Glory Logo" class="logo-img">
     </div>
     <div class="logo-text">
       <span class="logo-name">Light <em>&</em> Glory</span>
@@ -31,10 +74,26 @@
   <ul class="nav-links">
     <li><a href="index.html" class="active">Home</a></li>
     <li><a href="about.html">About Us</a></li>
-    <li><a href="volunteer.html">Volunteer</a></li>
+    <li class="dropdown">
+      <a href="#" class="dropdown-toggle">Programs</a>
+      <ul class="dropdown-menu">
+        <li><a href="education (1).html">Education</a></li>
+        <li><a href="medical (1).html">Medical Care</a></li>
+        <li><a href="nutrition (1).html">Nutrition</a></li>
+        <li><a href="spiritual (1).html">Spiritual Growth</a></li>
+        <li><a href="vocational.html">Vocational Training</a></li>
+        <li><a href="haven.html">Safe Haven</a></li>
+      </ul>
+    </li>
+    <li class="dropdown">
+      <a href="#" class="dropdown-toggle">Get Involved</a>
+      <ul class="dropdown-menu">
+        <li><a href="volunteer.html">Volunteer</a></li>
+        <li><a href="donate.html">Give / Donate</a></li>
+      </ul>
+    </li>
     <li><a href="about.html#gallery">Gallery</a></li>
     <li><a href="contact.html">Contact</a></li>
-    <li><a href="donate.html" class="btn-donate">Give</a></li>
   </ul>
 
   <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
@@ -58,10 +117,28 @@
   <div class="drawer-links">
     <a href="index.html" onclick="closeMenu()">Home</a>
     <a href="about.html" onclick="closeMenu()">About Us</a>
-    <a href="volunteer.html" onclick="closeMenu()">Volunteer</a>
+    
+    <div class="mobile-dropdown">
+      <a href="#" class="mobile-dropdown-toggle" onclick="toggleMobileDropdown(event)">Programs</a>
+      <div class="mobile-dropdown-content" id="mobilePrograms">
+        <a href="education (1).html" onclick="closeMenu()">Education</a>
+        <a href="medical (1).html" onclick="closeMenu()">Medical Care</a>
+        <a href="nutrition (1).html" onclick="closeMenu()">Nutrition</a>
+        <a href="spiritual (1).html" onclick="closeMenu()">Spiritual Growth</a>
+        <a href="vocational.html" onclick="closeMenu()">Vocational Training</a>
+        <a href="haven.html" onclick="closeMenu()">Safe Haven</a>
+      </div>
+    </div>
+
+    <div class="mobile-dropdown">
+      <a href="#" class="mobile-dropdown-toggle" onclick="toggleMobileDropdown(event)">Get Involved</a>
+      <div class="mobile-dropdown-content">
+        <a href="volunteer.html" onclick="closeMenu()">Volunteer</a>
+        <a href="donate.html" onclick="closeMenu()">Give / Donate</a>
+      </div>
+    </div>
     <a href="about.html#gallery" onclick="closeMenu()">Gallery</a>
-    <a href="contact.html" onclick="closeMenu()">Contact</a>
-    <a href="donate.html" class="m-donate" onclick="closeMenu()">Give / Donate</a>
+    <a href="contact.html" class="m-contact" onclick="closeMenu()">Contact</a>
   </div>
 </div>
 <!-- HERO -->
@@ -207,21 +284,16 @@
       <img src="light36.jpeg" alt="Education" style="width:100%; height:200px; object-fit:cover; border-radius:10px 10px 0 0;">
       <div class="card-body">
         <h3>Education</h3>
-        <div class="card-content" style="display:none;">
+        <div class="card-content" >
          <p>
   At Light and Glory Orphanage School, we provide quality primary education to 
   orphaned and underprivileged children, giving them the foundation they need to 
   succeed. Our programs go beyond the classroom offering structured learning, 
   mentorship, and emotional support that nurture the whole child.
 </p>
-<p>
-  We believe that every child, regardless of background or circumstance, deserves 
-  the chance to learn, grow, and reach their full potential. Through dedicated 
-  teachers and a nurturing environment, we walk with each child on their journey 
-  toward a brighter future.
-</p>
+
         </div>
-        <button class="toggle-btn" onclick="toggleCard(this)">Read More</button>
+        <a class="toggle-btn" href="education (1).html">Read More</a>
       </div>
     </div>
 
@@ -229,19 +301,15 @@
       <img src="light27.jpeg" alt="Meals" style="width:100%; height:200px; object-fit:cover; border-radius:10px 10px 0 0;">
       <div class="card-body">
         <h3>Meals & Nutrition</h3>
-        <div class="card-content" style="display:none;">
+        <div class="card-content">
           <p>
   At Light and Glory Orphanage School, we believe that no child can learn on an 
   empty stomach. That is why every child in our care receives a hot, nutritious 
   meal every day prepared with care and designed to meet their growing needs.
 </p>
-<p>
-  A fed child is a focused child. By ensuring every student is well-nourished, 
-  we create the conditions for real learning to happen where young minds are 
-  alert, energized, and ready to absorb, grow, and thrive.
-</p>
+
         </div>
-        <button class="toggle-btn" onclick="toggleCard(this)">Read More</button>
+        <a class="toggle-btn" href="nutrition (1).html">Read More</a>
       </div>
     </div>
 
@@ -249,20 +317,16 @@
       <img src="light3.jpeg" alt="Medical Care" style="width:100%; height:200px; object-fit:cover; border-radius:10px 10px 0 0;">
       <div class="card-body">
         <h3>Medical Care</h3>
-        <div class="card-content" style="display:none;">
+        <div class="card-content">
          <p>
   At Light and Glory Orphanage School, we understand that a healthy child is a 
   thriving child. That is why we ensure every child in our care has access to 
   basic healthcare, regular medical checkups, and prompt treatment whenever they 
   fall sick because good health is the foundation of everything else.
 </p>
-<p>
-  From routine wellness checks to handling medical emergencies, we walk alongside 
-  each child with the care and attention they deserve. No child should have to 
-  face illness alone, and at Light and Glory, none of them ever do.
-</p>
+
         </div>
-        <button class="toggle-btn" onclick="toggleCard(this)">Read More</button>
+        <a class="toggle-btn" href="education (1).html">Read More</a>
       </div>
     </div>
 
@@ -270,7 +334,7 @@
       <img src="light42.jpeg" alt="Spiritual Growth" style="width:100%; height:200px; object-fit:cover; border-radius:10px 10px 0 0;">
       <div class="card-body">
         <h3>Spiritual Growth</h3>
-        <div class="card-content" style="display:none;">
+        <div class="card-content" ;>
         <p>
   At Light and Glory Orphanage School, faith is at the heart of everything we do. 
   Rooted in Christian values, we believe that nurturing a child's spiritual 
@@ -278,14 +342,9 @@
   worship, and prayer, we create an environment where children grow not just in 
   knowledge, but in character and faith.
 </p>
-<p>
-  We are committed to raising young people of integrity, compassion, and purpose. 
-  By grounding each child in the values of love, honesty, and service, we equip 
-  them to face the world with confidence and a heart anchored in something 
-  greater than themselves.
-</p>
+
         </div>
-        <button class="toggle-btn" onclick="toggleCard(this)">Read More</button>
+        <a class="toggle-btn" href="education (1).html">Read More</a>
       </div>
     </div>
 
@@ -293,21 +352,16 @@
       <img src="light3.jpeg" alt="Vocational Skills" style="width:100%; height:200px; object-fit:cover; border-radius:10px 10px 0 0;">
       <div class="card-body">
         <h3>Vocational Skills</h3>
-        <div class="card-content" style="display:none;">
+        <div class="card-content">
           <p>
   As our children grow, so does our commitment to their future. At Light and Glory 
   Orphanage School, we equip older children with practical, hands-on skills that 
   prepare them for life beyond our walls empowering them to stand on their own 
   feet and contribute meaningfully to their communities.
 </p>
-<p>
-  We believe that true care goes beyond providing shelter and education it means 
-  setting every young person up for independence and dignity. By investing in their 
-  abilities and potential, we raise not just survivors, but confident, self-reliant, 
-  and productive members of society.
-</p>
+
         </div>
-        <button class="toggle-btn" onclick="toggleCard(this)">Read More</button>
+        <a class="toggle-btn" href="vocational.html">Read More</a>
       </div>
     </div>
 
@@ -315,21 +369,16 @@
       <img src="light3.jpeg" alt="Safe Haven" style="width:100%; height:200px; object-fit:cover; border-radius:10px 10px 0 0;">
       <div class="card-body">
         <h3>Safe Haven</h3>
-        <div class="card-content" style="display:none;">
+        <div class="card-content">
           <p>
   Nestled in the heart of Namutumba District, Uganda, Light and Glory Orphanage 
   School is more than an institution it is a home. We open our doors to orphaned 
   and vulnerable children, offering them a safe, warm, and loving environment where 
   they are seen, valued, and cared for.
 </p>
-<p>
-  Every child who comes to us carries their own story. We meet them where they are, 
-  wrapping them in stability, compassion, and belonging. Here, they are not just 
-  students they are family, and we are committed to walking with them every step 
-  of the way.
-</p>
+
         </div>
-        <button class="toggle-btn" onclick="toggleCard(this)">Read More</button>
+        <a class="toggle-btn" href="safe-haven.html">Read More</a>
       </div>
     </div>
 
@@ -484,42 +533,41 @@
   </div>
 </section>
 
-<!-- FOOTER -->
+<!-- ── FOOTER ── -->
 <footer class="ft">
   <div class="ft-top-bar"></div>
   <div class="ft-main">
 
-    <div>
-      <div class="ft-badge">Est. 2012 · Namutumba, Uganda</div>
-      <div class="ft-brand-name">Light &amp; <em>Glory</em></div>
-      <div class="ft-brand-sub">Children's Home &amp; School</div>
-      <p class="ft-brand-desc">Transforming the lives</p>
+    <div class="ft-brand">
+      <div class="ft-badge">Official Website</div>
+      <div class="ft-brand-name">Light <em>&</em> Glory</div>
+      <div class="ft-brand-sub">Orphanage School Namutumba</div>
+      <p class="ft-brand-desc">Empowering underprivileged children through education, healthcare, and vocational skills. Join us in making a lasting impact in Namutumba, Uganda.</p>
       <div class="ft-socials">
-        <a class="ft-social" href="#" title="Facebook">f</a>
-        <a class="ft-social" href="#" title="Instagram">in</a>
-        <a class="ft-social" href="#" title="YouTube">▶</a>
-        <a class="ft-social" href="#" title="WhatsApp">✉</a>
+        <a class="ft-social" href="https://facebook.com" target="_blank" title="Facebook">f</a>
+        <a class="ft-social" href="https://twitter.com" target="_blank" title="Twitter">t</a>
+        <a class="ft-social" href="https://instagram.com" target="_blank" title="Instagram">i</a>
+        <a class="ft-social" href="https://wa.me/256757970467" target="_blank" title="WhatsApp">✉</a>
       </div>
     </div>
 
     <div>
       <div class="ft-col-title">Quick Links</div>
       <ul class="ft-links">
-        <li><a href="#">Home</a></li>
-        <li><a href="#">About Us</a></li>
-        <li><a href="#">Our Programs</a></li>
-        <li><a href="#">Get Involved</a></li>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="about.html#gallery">Photo Gallery</a></li>
+        <li><a href="contact.html">Contact Us</a></li>
       </ul>
     </div>
 
     <div>
       <div class="ft-col-title">Get Involved</div>
       <ul class="ft-links">
-        <li><a href="#">Donate Now</a></li>
-        <li><a href="#">Sponsor a Child</a></li>
-        <li><a href="#">Volunteer With Us</a></li>
-        <li><a href="#">Partner With Us</a></li>
-        
+        <li><a href="donate.html">Donate Now</a></li>
+        <li><a href="volunteer.html">Volunteer With Us</a></li>
+        <li><a href="donate.html#sponsor">Sponsor a Child</a></li>
+        <li><a href="contact.html#partner">Partner With Us</a></li>
       </ul>
     </div>
 
@@ -553,11 +601,11 @@
   <div class="ft-divider"></div>
 
   <div class="ft-bottom">
-    <p class="ft-copy">© 2026 Light &amp; Glory Orphanage School. Made with <span>♥</span> in Uganda.</p>
+    <p class="ft-copy">© 2026 <span>Light & Glory</span> Orphanage School. Made with <span>♥</span> in Uganda.</p>
     <div class="ft-bottom-links">
-      <a href="#">Privacy Policy</a>
-      <a href="#">Terms</a>
-      <a href="#">Contact</a>
+      <a href="contact.html">Privacy Policy</a>
+      <a href="contact.html">Terms</a>
+      <a href="contact.html">Support</a>
     </div>
   </div>
 </footer>

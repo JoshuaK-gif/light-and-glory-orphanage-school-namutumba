@@ -3,8 +3,10 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Volunteer Application Light & Glory Orphanage School</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Lato:wght@300;400;700&display=swap" rel="stylesheet"/>
+  <title>Volunteer Application — Light & Glory Orphanage School</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Lato:wght@300;400;700&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="volunteer.css"/>
   <script src="volunteer.js" defer ></script>
 </head>
@@ -13,10 +15,9 @@
 <div id="scroll-progress"></div>
 <!-- ===== NAVBAR ===== -->
 <nav class="navbar" id="navbar">
-  <a href="#" class="logo">
+  <a href="index.html" class="logo">
     <div class="logo-img-wrap">
-      <!-- Replace src with your actual logo path -->
-      <img src="lightandglorylogo.png" alt="Light and Glory Transformation Ministries Logo" class="logo-img">
+      <img src="lightandglorylogo.png" alt="Light & Glory Logo" class="logo-img">
     </div>
     <div class="logo-text">
       <span class="logo-name">Light <em>&</em> Glory</span>
@@ -27,10 +28,26 @@
   <ul class="nav-links">
     <li><a href="index.html">Home</a></li>
     <li><a href="about.html">About Us</a></li>
-    <li><a href="volunteer.html">Volunteer</a></li>
+    <li class="dropdown">
+      <a href="#" class="dropdown-toggle">Programs</a>
+      <ul class="dropdown-menu">
+        <li><a href="education (1).html">Education</a></li>
+        <li><a href="medical (1).html">Medical Care</a></li>
+        <li><a href="nutrition (1).html">Nutrition</a></li>
+        <li><a href="spiritual (1).html">Spiritual Growth</a></li>
+        <li><a href="vocational.html">Vocational Training</a></li>
+        <li><a href="haven.html">Safe Haven</a></li>
+      </ul>
+    </li>
+    <li class="dropdown">
+      <a href="#" class="dropdown-toggle">Get Involved</a>
+      <ul class="dropdown-menu">
+        <li><a href="volunteer.html" class="active">Volunteer</a></li>
+        <li><a href="donate.html">Give / Donate</a></li>
+      </ul>
+    </li>
     <li><a href="about.html#gallery">Gallery</a></li>
     <li><a href="contact.html">Contact</a></li>
-    <li><a href="donate.html" class="btn-donate">Give</a></li>
   </ul>
 
   <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
@@ -54,10 +71,26 @@
   <div class="drawer-links">
     <a href="index.html" onclick="closeMenu()">Home</a>
     <a href="about.html" onclick="closeMenu()">About Us</a>
-    <a href="volunteer.html" onclick="closeMenu()">Volunteer</a>
+    <div class="mobile-dropdown">
+      <a href="#" class="mobile-dropdown-toggle" onclick="toggleMobileDropdown(event)">Programs</a>
+      <div class="mobile-dropdown-content" id="mobilePrograms">
+        <a href="education (1).html" onclick="closeMenu()">Education</a>
+        <a href="medical (1).html" onclick="closeMenu()">Medical Care</a>
+        <a href="nutrition (1).html" onclick="closeMenu()">Nutrition</a>
+        <a href="spiritual (1).html" onclick="closeMenu()">Spiritual Growth</a>
+        <a href="vocational.html" onclick="closeMenu()">Vocational Training</a>
+        <a href="haven.html" onclick="closeMenu()">Safe Haven</a>
+      </div>
+    </div>
+    <div class="mobile-dropdown">
+      <a href="#" class="mobile-dropdown-toggle" onclick="toggleMobileDropdown(event)">Get Involved</a>
+      <div class="mobile-dropdown-content">
+        <a href="volunteer.html" onclick="closeMenu()">Volunteer</a>
+        <a href="donate.html" onclick="closeMenu()">Give / Donate</a>
+      </div>
+    </div>
     <a href="about.html#gallery" onclick="closeMenu()">Gallery</a>
-    <a href="contact.html" onclick="closeMenu()">Contact</a>
-    <a href="donate.html" class="m-donate" onclick="closeMenu()">Give / Donate</a>
+    <a href="contact.html" class="m-contact" onclick="closeMenu()">Contact</a>
   </div>
 </div>
 
@@ -342,6 +375,83 @@
   </div>
 
 </div><!-- /page-wrap -->
+
+<!-- ── FOOTER ── -->
+<footer class="ft">
+  <div class="ft-top-bar"></div>
+  <div class="ft-main">
+
+    <div>
+      <div class="ft-badge">Est. 2012 · Namutumba, Uganda</div>
+      <div class="ft-brand-name">Light &amp; <em>Glory</em></div>
+      <div class="ft-brand-sub">Children's Home &amp; School</div>
+      <p class="ft-brand-desc">Transforming lives through love, faith, and education.</p>
+      <div class="ft-socials">
+        <a class="ft-social" href="https://facebook.com" target="_blank" title="Facebook">f</a>
+        <a class="ft-social" href="https://instagram.com" target="_blank" title="Instagram">in</a>
+        <a class="ft-social" href="https://youtube.com" target="_blank" title="YouTube">▶</a>
+        <a class="ft-social" href="https://wa.me/256757970467" target="_blank" title="WhatsApp">✉</a>
+      </div>
+    </div>
+
+    <div>
+      <div class="ft-col-title">Quick Links</div>
+      <ul class="ft-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="about.html#gallery">Photo Gallery</a></li>
+        <li><a href="contact.html">Contact Us</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="ft-col-title">Get Involved</div>
+      <ul class="ft-links">
+        <li><a href="donate.html">Donate Now</a></li>
+        <li><a href="volunteer.html">Volunteer With Us</a></li>
+        <li><a href="donate.html#sponsor">Sponsor a Child</a></li>
+        <li><a href="contact.html#partner">Partner With Us</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="ft-col-title">Contact Us</div>
+      <div class="ft-contact-item">
+        <div class="ft-contact-icon">📍</div>
+        <div class="ft-contact-text">
+          <strong>Address</strong>
+          Namutumba District,<br>Eastern Uganda
+        </div>
+      </div>
+      <div class="ft-contact-item">
+        <div class="ft-contact-icon">✉</div>
+        <div class="ft-contact-text">
+          <strong>Email</strong>
+          info@lightandglory.org
+        </div>
+      </div>
+      <div class="ft-contact-item">
+        <div class="ft-contact-icon">📞</div>
+        <div class="ft-contact-text">
+          <strong>Phone</strong>
+          +256 757 970 467
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="ft-divider"></div>
+
+  <div class="ft-bottom">
+    <p class="ft-copy">© 2026 Light &amp; Glory Orphanage School. Made with <span>♥</span> in Uganda.</p>
+    <div class="ft-bottom-links">
+      <a href="contact.html">Privacy Policy</a>
+      <a href="contact.html">Terms</a>
+      <a href="contact.html">Support</a>
+    </div>
+  </div>
+</footer>
 
 </body>
 </html>

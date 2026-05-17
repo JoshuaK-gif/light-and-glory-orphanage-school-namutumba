@@ -462,9 +462,26 @@
   <ul class="nav-links">
     <li><a href="index.html" class="active">Home</a></li>
     <li><a href="about.html">About</a></li>
+    <li class="dropdown">
+      <a href="#" class="dropdown-toggle">Programs</a>
+      <ul class="dropdown-menu">
+        <li><a href="education (1).html">Education</a></li>
+        <li><a href="medical (1).html">Medical Care</a></li>
+        <li><a href="nutrition (1).html">Nutrition</a></li>
+        <li><a href="spiritual (1).html">Spiritual Growth</a></li>
+        <li><a href="vocational.html">Vocational Training</a></li>
+        <li><a href="haven.html">Safe Haven</a></li>
+      </ul>
+    </li>
     <li><a href="sermons.html">Sermons</a></li>
+    <li class="dropdown">
+      <a href="#" class="dropdown-toggle">Get Involved</a>
+      <ul class="dropdown-menu">
+        <li><a href="volunteer.html">Volunteer</a></li>
+        <li><a href="donate.html">Give / Donate</a></li>
+      </ul>
+    </li>
     <li><a href="contact.html">Contact</a></li>
-    <li><a href="donate.html" class="btn-donate">Give</a></li>
   </ul>
 
   <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
@@ -488,9 +505,28 @@
   <div class="drawer-links">
     <a href="index.html" onclick="closeMenu()">Home</a>
     <a href="about.html" onclick="closeMenu()">About</a>
+
+    <div class="mobile-dropdown">
+      <a href="#" class="mobile-dropdown-toggle" onclick="toggleMobileDropdown(event)">Programs</a>
+      <div class="mobile-dropdown-content" id="mobilePrograms">
+        <a href="education (1).html" onclick="closeMenu()">Education</a>
+        <a href="medical (1).html" onclick="closeMenu()">Medical Care</a>
+        <a href="nutrition (1).html" onclick="closeMenu()">Nutrition</a>
+        <a href="spiritual (1).html" onclick="closeMenu()">Spiritual Growth</a>
+        <a href="vocational.html" onclick="closeMenu()">Vocational Training</a>
+        <a href="haven.html" onclick="closeMenu()">Safe Haven</a>
+      </div>
+    </div>
+
     <a href="sermons.html" onclick="closeMenu()">Sermons</a>
-    <a href="contact.html" onclick="closeMenu()">Contact</a>
-    <a href="donate.html" class="m-donate" onclick="closeMenu()">Give / Donate</a>
+    <div class="mobile-dropdown">
+      <a href="#" class="mobile-dropdown-toggle" onclick="toggleMobileDropdown(event)">Get Involved</a>
+      <div class="mobile-dropdown-content">
+        <a href="volunteer.html" onclick="closeMenu()">Volunteer</a>
+        <a href="donate.html" onclick="closeMenu()">Give / Donate</a>
+      </div>
+    </div>
+    <a href="contact.html" class="m-contact" onclick="closeMenu()">Contact</a>
   </div>
 </div>
 
@@ -527,6 +563,16 @@
     backdrop.classList.remove('open');
     hamburger.setAttribute('aria-expanded', false);
     document.body.style.overflow = '';
+  }
+
+  function toggleMobileDropdown(e) {
+    e.preventDefault();
+    const toggle = e.currentTarget;
+    const content = toggle.nextElementSibling;
+    if (content && content.classList.contains('mobile-dropdown-content')) {
+      content.classList.toggle('open');
+      toggle.classList.toggle('active');
+    }
   }
 </script>
 </body>

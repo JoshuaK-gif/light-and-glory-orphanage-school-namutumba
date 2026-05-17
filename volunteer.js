@@ -5,34 +5,37 @@
   const mobileNav = document.getElementById('mobileNav');
   const backdrop  = document.getElementById('drawerBackdrop');
 
-  window.addEventListener('scroll', () => {
-    navbar.classList.toggle('scrolled', window.scrollY > 50);
-  });
+  if (navbar) {
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 50);
+    });
+  }
 
-  hamburger.addEventListener('click', openMenu);
-
-  function openMenu() {
-    mobileNav.classList.add('open');
-    hamburger.classList.add('open');
-    hamburger.setAttribute('aria-expanded', 'true');
-    backdrop.style.display = 'block';
-    setTimeout(() => backdrop.classList.add('open'), 10);
-    document.body.style.overflow = 'hidden';
+  if (hamburger && mobileNav && backdrop) {
+    hamburger.addEventListener('click', () => {
+      const open = hamburger.classList.toggle('open');
+      mobileNav.classList.toggle('open', open);
+      backdrop.classList.toggle('open', open);
+      hamburger.setAttribute('aria-expanded', open);
+      document.body.style.overflow = open ? 'hidden' : '';
+    });
   }
 
   window.closeMenu = function () {
-    mobileNav.classList.remove('open');
+    if (!hamburger) return;
     hamburger.classList.remove('open');
-    hamburger.setAttribute('aria-expanded', 'false');
+    mobileNav.classList.remove('open');
     backdrop.classList.remove('open');
+    hamburger.setAttribute('aria-expanded', 'false');
     document.body.style.overflow = '';
-    setTimeout(() => { backdrop.style.display = 'none'; }, 400);
   };
 
-  backdrop.addEventListener('click', closeMenu);
+  if (backdrop) {
+    backdrop.addEventListener('click', closeMenu);
+  }
 
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && mobileNav.classList.contains('open')) closeMenu();
+    if (e.key === 'Escape' && mobileNav && mobileNav.classList.contains('open')) closeMenu();
   });
 })();
 
@@ -243,3 +246,15 @@ function previewPhoto(e) {
 }
 
 updateUI();
+
+// ── Mobile Dropdown ──────────────────────────────────────────
+function toggleMobileDropdown(e) {
+  e.preventDefault();
+  const toggle = e.currentTarget;
+  const content = toggle.nextElementSibling;
+  
+  if (content && content.classList.contains('mobile-dropdown-content')) {
+    content.classList.toggle('open');
+    toggle.classList.toggle('active');
+  }
+}

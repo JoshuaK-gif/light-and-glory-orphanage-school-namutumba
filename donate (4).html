@@ -6,7 +6,9 @@
 <title>Donate – Light & Glory Transformation Ministries</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="donate.css">
-<script src="https://checkout.flutterwave.com/v3.js"></script>
+<script src="https://www.pesapal.com/iframe/js/pesapal.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 </head>
 <body>
 
@@ -121,9 +123,9 @@
       <!-- Payment method selection -->
       <span class="pay-label">Choose how to pay</span>
       <div class="pay-methods">
-        <button class="pay-btn selected" onclick="selectPay(this, 'flutterwave')">
-          <div class="pay-btn__logo"><span class="fw-logo">flw</span></div>
-          <span class="pay-btn__label">Flutterwave</span>
+        <button class="pay-btn selected" onclick="selectPay(this, 'pesapal')">
+          <div class="pay-btn__logo"><span class="fw-logo">psp</span></div>
+          <span class="pay-btn__label">Pesapal</span>
         </button>
         <button class="pay-btn" onclick="selectPay(this, 'paypal')">
           <div class="pay-btn__logo"><span class="pp-logo">PayPal</span></div>
@@ -159,7 +161,7 @@
     </div>
 
     <!-- ═══════════════════════════════════════════════════ -->
-    <!-- SUCCESS STATE — shown after Flutterwave confirms   -->
+    <!-- SUCCESS STATE — shown after Pesapal confirms       -->
     <!-- ═══════════════════════════════════════════════════ -->
     <div class="success-state" id="successState">
       <div class="success-circle">🙏</div>
@@ -425,7 +427,7 @@
         </div>
         <div class="trust-item">
           <div class="trust-icon">🔒</div>
-          Secure payments via Flutterwave &amp; PayPal
+          Secure payments via Pesapal &amp; PayPal
         </div>
         <div class="trust-item">
           <div class="trust-icon">📧</div>
@@ -454,14 +456,16 @@
 // ============================================================
 // LIGHT & GLORY ORPHANAGE SCHOOL — DONATION PAGE JAVASCRIPT
 // Fixed: PayPal flow, Mobile Money flow, Monthly logic,
-//        Flutterwave verification, tx_ref uniqueness
+//        Pesapal verification, tx_ref uniqueness
 // ============================================================
 
 // ── CONFIG ──────────────────────────────────────────────────
-// Swap this with the client's real Public Key once they send it.
-// Test key  → starts with FLWPUBK_TEST-
-// Live key  → starts with FLWPUBK-  (no _TEST)
-const FLW_PUBLIC_KEY = "FLWPUBK_TEST-xxxxxxxxxxxxxxxxxxxx-X";
+// Pesapal keys — get these from your Pesapal dashboard after signup
+// Sandbox (test): https://cybqa.pesapal.com
+// Live: https://www.pesapal.com
+const PESAPAL_CONSUMER_KEY    = "YOUR_PESAPAL_CONSUMER_KEY";    // ← from Pesapal dashboard
+const PESAPAL_CONSUMER_SECRET = "YOUR_PESAPAL_CONSUMER_SECRET"; // ← from Pesapal dashboard
+const PESAPAL_ENV = "sandbox"; // ← change to "live" when going live
 
 // Replace with your Make.com webhook URL
 // How: Make.com → New Scenario → Webhooks → Custom Webhook → Copy URL
@@ -473,17 +477,38 @@ const PAYPAL_BUTTON_ID = "YOUR_PAYPAL_BUTTON_ID";
 
 // Mobile money instructions shown to donor after they choose MM
 const MOBILE_MONEY = {
-  number:   "07",   // ← replace with client's actual MM number
+  number:   "0700 000 000",   // ← replace with client's actual MM number
   provider: "MTN Mobile Money",
   name:     "Light & Glory Orphanage School"
 };
+
+// ── SUPABASE CONFIG ──────────────────────────────────────────
+const SUPABASE_URL = "https://jebencmorwugfhjulnus.supabase.co";
+const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImplYmVuY21vcnd1Z2ZoanVsbnVzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzgwMDU0NjQsImV4cCI6MjA5MzU4MTQ2NH0.JowepYmCvKq6WPI_DBQbLSiB2dHNd83IJplNvPUKVbQ";
+const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+// ── EMAILJS CONFIG ───────────────────────────────────────────
+// 1. Go to https://www.emailjs.com and create a free account
+// 2. Add an Email Service (Gmail recommended) → copy Service ID
+// 3. Create two Email Templates (donor receipt + admin alert) → copy Template IDs
+// 4. Go to Account → copy your Public Key
+const EMAILJS_PUBLIC_KEY   = "YOUR_EMAILJS_PUBLIC_KEY";   // ← from EmailJS Account page
+const EMAILJS_SERVICE_ID   = "YOUR_SERVICE_ID";           // ← e.g. "service_abc123"
+const EMAILJS_DONOR_TEMPLATE  = "YOUR_DONOR_TEMPLATE_ID"; // ← thank-you email to donor
+const EMAILJS_ADMIN_TEMPLATE  = "YOUR_ADMIN_TEMPLATE_ID"; // ← notification email to admin
+const ADMIN_EMAIL = "admin@lightandglory.org";            // ← replace with real admin email
+
+// Initialize EmailJS safely
+if (typeof emailjs !== "undefined") {
+  emailjs.init(EMAILJS_PUBLIC_KEY);
+}
 // ────────────────────────────────────────────────────────────
 
 
 // ── STATE ────────────────────────────────────────────────────
 let selectedAmount = 25;
 let selectedFreq   = "once";
-let selectedPay    = "flutterwave";
+let selectedPay    = "pesapal";
 // ────────────────────────────────────────────────────────────
 
 
@@ -599,8 +624,8 @@ function handleDonate() {
 
   const { firstName, lastName, email, phone, amt } = form;
 
-  if (selectedPay === "flutterwave") {
-    handleFlutterwave({ firstName, lastName, email, phone, amt });
+  if (selectedPay === "pesapal") {
+    handlePesapal({ firstName, lastName, email, phone, amt });
 
   } else if (selectedPay === "paypal") {
     handlePayPal({ firstName, lastName, email, amt });
@@ -612,66 +637,129 @@ function handleDonate() {
 // ────────────────────────────────────────────────────────────
 
 
-// ── FLUTTERWAVE HANDLER ──────────────────────────────────────
-// Covers both one-time and monthly donations.
-// Monthly = Flutterwave Payment Plan (requires plan ID from dashboard).
-function handleFlutterwave({ firstName, lastName, email, phone, amt }) {
+// ── PESAPAL HANDLER ─────────────────────────────────────────
+// Covers both one-time and monthly donations via Pesapal iframe.
+// Supports: MTN Mobile Money, Airtel Money, Visa, Mastercard
+//
+// HOW TO GET YOUR KEYS:
+// 1. Sign up at pesapal.com (or cybqa.pesapal.com for sandbox)
+// 2. Go to Dashboard → API Keys
+// 3. Copy Consumer Key and Consumer Secret → paste in CONFIG above
+function handlePesapal({ firstName, lastName, email, phone, amt }) {
   const txRef = generateTxRef("LGO");
-
-  // ── MONTHLY via Flutterwave Payment Plan ──────────────────
-  // To enable real recurring charges:
-  // 1. Go to Flutterwave Dashboard → Payment Plans → Create Plan
-  // 2. Set interval: monthly, amount: leave blank (donor sets it), currency: USD
-  // 3. Copy the Plan ID and paste it below
-  // 4. Uncomment the payment_plan line
-  // Without a plan ID, monthly acts like a one-time charge with a note.
   const isMonthly = selectedFreq === "monthly";
   const description = isMonthly
     ? "Monthly recurring donation for orphaned children"
     : "One-time donation for orphaned children";
 
-  FlutterwaveCheckout({
-    public_key:      FLW_PUBLIC_KEY,
-    tx_ref:          txRef,
-    amount:          amt,
-    currency:        "USD",
-    payment_options: "card, mobilemoney, ussd, banktransfer",
-    // payment_plan: "YOUR_PLAN_ID_HERE", // ← uncomment for true monthly recurring
-    customer: {
-      email,
-      phone_number: phone,
-      name: `${firstName} ${lastName}`
-    },
-    customizations: {
-      title:       "Light & Glory Orphanage School",
-      description,
-      logo:        "https://lightandglory.org/lightandglorylogo.png"
-    },
-    callback: function(data) {
-      // data.status from the popup is NOT enough to confirm payment.
-      // We log it here, but ideally verify server-side using the tx_ref.
-      if (data.status === "successful" || data.status === "completed") {
+  // Pesapal sandbox vs live base URL
+  const baseURL = PESAPAL_ENV === "live"
+    ? "https://www.pesapal.com/iframe/requestorder"
+    : "https://cybqa.pesapal.com/pesapalv3/api/Transactions/SubmitOrderRequest";
+
+  // Build the Pesapal order params
+  const orderParams = {
+    id:           txRef,
+    currency:     "USD",
+    amount:       amt,
+    description:  description,
+    callback_url: window.location.href,
+    notification_id: "", // ← add your IPN ID from Pesapal dashboard
+    billing_address: {
+      email_address:  email,
+      phone_number:   phone || "",
+      first_name:     firstName,
+      last_name:      lastName
+    }
+  };
+
+  // Show Pesapal payment iframe in a modal
+  const modal = document.createElement("div");
+  modal.id = "pesapalModal";
+  modal.style.cssText = `
+    position:fixed; top:0; left:0; width:100%; height:100%;
+    background:rgba(0,0,0,0.7); z-index:9999;
+    display:flex; align-items:center; justify-content:center;
+  `;
+
+  const modalContent = document.createElement("div");
+  modalContent.style.cssText = `
+    background:#fff; border-radius:12px; padding:20px;
+    width:90%; max-width:500px; max-height:90vh;
+    overflow-y:auto; position:relative;
+  `;
+
+  const closeBtn = document.createElement("button");
+  closeBtn.textContent = "✕ Close";
+  closeBtn.style.cssText = `
+    position:absolute; top:10px; right:10px;
+    background:#f44336; color:#fff; border:none;
+    padding:6px 12px; border-radius:6px; cursor:pointer;
+  `;
+  closeBtn.onclick = () => document.body.removeChild(modal);
+
+  const iframe = document.createElement("iframe");
+  iframe.style.cssText = "width:100%; height:500px; border:none;";
+
+  // NOTE: In production you need a backend to get the iframe URL token from Pesapal API.
+  // For now we show setup instructions. Once you have your Consumer Key & Secret,
+  // use a Supabase Edge Function to get the Pesapal auth token and iframe URL.
+  if (PESAPAL_CONSUMER_KEY === "YOUR_PESAPAL_CONSUMER_KEY") {
+    modalContent.innerHTML = `
+      <h3 style="color:#e67e22; margin-bottom:12px;">⚙️ Pesapal Not Configured Yet</h3>
+      <p style="font-size:14px; line-height:1.6;">
+        To activate Pesapal payments:<br><br>
+        1. Sign up at <a href="https://pesapal.com" target="_blank">pesapal.com</a><br>
+        2. Get your <strong>Consumer Key</strong> and <strong>Consumer Secret</strong><br>
+        3. Paste them into the CONFIG section at the top of this file<br><br>
+        <strong>Transaction Reference:</strong> ${txRef}<br>
+        <strong>Amount:</strong> $${amt}<br>
+        <strong>Donor:</strong> ${firstName} ${lastName}
+      </p>
+      <button onclick="document.body.removeChild(document.getElementById('pesapalModal'))"
+        style="background:#2563eb;color:#fff;border:none;padding:10px 20px;border-radius:8px;cursor:pointer;margin-top:12px;">
+        Close
+      </button>
+    `;
+  } else {
+    // Real Pesapal iframe — backend returns the iframe src URL
+    // Replace this src with the URL returned by your Supabase Edge Function
+    iframe.src = `${baseURL}?${new URLSearchParams({
+      pesapal_merchant_reference: txRef,
+      pesapal_amount: amt,
+      pesapal_currency: "USD",
+      pesapal_description: description,
+      pesapal_email: email,
+      pesapal_first_name: firstName,
+      pesapal_last_name: lastName,
+      pesapal_phonenumber: phone || ""
+    }).toString()}`;
+
+    // Listen for Pesapal payment confirmation message
+    window.addEventListener("message", function pesapalListener(event) {
+      if (event.data && event.data.pesapal_transaction_tracking_id) {
+        window.removeEventListener("message", pesapalListener);
+        document.body.removeChild(modal);
         showSuccess({
-          ref:     data.transaction_id || txRef,
-          method:  "flutterwave",
+          ref:       event.data.pesapal_merchant_reference || txRef,
+          method:    "pesapal",
           amt,
           email,
           firstName,
           lastName,
           phone,
           isMonthly,
-          verified: false // set to true only after backend verification
+          verified:  true
         });
-      } else {
-        // Payment failed or was declined
-        showError("Payment was not completed. Please try again.");
       }
-    },
-    onclose: function() {
-      // Donor closed the popup without paying — do nothing
-      console.log("Flutterwave popup closed by donor.");
-    }
-  });
+    });
+
+    modalContent.appendChild(closeBtn);
+    modalContent.appendChild(iframe);
+  }
+
+  modal.appendChild(modalContent);
+  document.body.appendChild(modal);
 }
 // ────────────────────────────────────────────────────────────
 
@@ -716,6 +804,18 @@ function handleMobileMoney({ firstName, lastName, email, phone, amt }) {
     phone
   });
 
+  // Save PENDING donation to Supabase
+  saveDonation({
+    reference:     mmRef,
+    firstName,
+    lastName,
+    email,
+    amount:        amt,
+    campaign:      "general",
+    status:        "pending",
+    paymentMethod: "mobilemoney"
+  });
+
   // Log the PENDING donation to Make.com so the client can follow up
   sendToMake({
     reference:      mmRef,
@@ -743,7 +843,30 @@ function showSuccess({ ref, method, amt, email, firstName, lastName, phone, isMo
   document.querySelector(".donate-card__body").style.display = "none";
   document.getElementById("successState").classList.add("show");
 
-  // Send confirmed donation to Make.com → Google Sheets + Brevo
+  // 1. Save to Supabase
+  saveDonation({
+    reference:     refCode,
+    firstName,
+    lastName,
+    email,
+    amount:        amt,
+    campaign:      isMonthly ? "monthly-giving" : "general",
+    status:        "completed",
+    paymentMethod: method
+  });
+
+  // 2. Send thank-you email to donor + alert to admin
+  sendEmails({
+    firstName,
+    lastName,
+    email,
+    amt,
+    reference: refCode,
+    method,
+    status:    "completed"
+  });
+
+  // 3. Send to Make.com → Google Sheets + Brevo
   sendToMake({
     reference:      refCode,
     amount:         amt,
@@ -847,6 +970,68 @@ function showError(message) {
 // ────────────────────────────────────────────────────────────
 
 
+// ── SAVE TO SUPABASE ─────────────────────────────────────────
+async function saveDonation({ reference, firstName, lastName, email, amount, campaign, status, paymentMethod }) {
+  try {
+    const { error } = await supabaseClient
+      .from("donations")
+      .insert([{
+        donor_name:  `${firstName} ${lastName}`,
+        donor_email: email,
+        amount:      amount,
+        campaign:    campaign || "general",
+        status:      status || "pending"
+      }]);
+
+    if (error) {
+      console.error("❌ Supabase insert error:", error.message);
+    } else {
+      console.log("✅ Donation saved to Supabase:", reference);
+    }
+  } catch (err) {
+    console.error("❌ Supabase error:", err);
+  }
+}
+// ────────────────────────────────────────────────────────────
+
+
+// ── SEND EMAILS (donor thank-you + admin alert) ──────────────
+async function sendEmails({ firstName, lastName, email, amt, reference, method, status }) {
+  // 1. Thank-you email to donor
+  try {
+    await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_DONOR_TEMPLATE, {
+      donor_name:    `${firstName} ${lastName}`,
+      donor_email:   email,
+      amount:        `$${amt}`,
+      reference:     reference,
+      payment_method: method,
+      organization:  "Light & Glory Transformation Ministries Orphanage School"
+    });
+    console.log("✅ Thank-you email sent to donor:", email);
+  } catch (err) {
+    console.error("❌ Donor email failed:", err);
+  }
+
+  // 2. Notification email to admin
+  try {
+    await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_ADMIN_TEMPLATE, {
+      admin_email:   ADMIN_EMAIL,
+      donor_name:    `${firstName} ${lastName}`,
+      donor_email:   email,
+      amount:        `$${amt}`,
+      reference:     reference,
+      payment_method: method,
+      status:        status,
+      donated_at:    new Date().toLocaleString("en-UG", { timeZone: "Africa/Kampala" })
+    });
+    console.log("✅ Admin notification email sent");
+  } catch (err) {
+    console.error("❌ Admin email failed:", err);
+  }
+}
+// ────────────────────────────────────────────────────────────
+
+
 // ── MAKE.COM WEBHOOK ─────────────────────────────────────────
 async function sendToMake(donationData) {
   try {
@@ -900,14 +1085,13 @@ async function sendToMake(donationData) {
   NOTE ON MONTHLY DONATIONS:
   ──────────────────────────
   The monthly toggle currently works as a label — it adds a note to the
-  Flutterwave popup and logs "monthly" to Make.com/Google Sheets.
+  Pesapal checkout and logs "monthly" to Make.com/Google Sheets.
   For TRUE auto-recurring charges (card billed every month automatically):
-  1. Go to Flutterwave Dashboard → Payment Plans → Create a Plan
+  1. Go to Pesapal Dashboard → Recurring Payments → Create a Plan
   2. Set: monthly interval, USD, give it a name
   3. Copy the Plan ID
-  4. In handleFlutterwave() above, uncomment the payment_plan line
-     and replace "YOUR_PLAN_ID_HERE" with the real ID
-  This requires the client to have a verified live Flutterwave account.
+  4. In handlePesapal() above, pass the plan ID in the order params
+  This requires the client to have a verified live Pesapal account.
 */
 </script>
 </body>

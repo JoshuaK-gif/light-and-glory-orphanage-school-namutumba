@@ -6,9 +6,87 @@
 <title>Donate – Light & Glory Transformation Ministries</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="donate.css">
-<script src="https://checkout.flutterwave.com/v3.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 </head>
 <body>
+
+<nav class="navbar" id="navbar">
+  <a href="index.html" class="logo">
+    <div class="logo-img-wrap">
+      <img src="lightandglorylogo.png" alt="Light & Glory Logo" class="logo-img">
+    </div>
+    <div class="logo-text">
+      <span class="logo-name">Light & <em>Glory</em></span>
+      <span class="logo-sub">Orphanage School Namutumba</span>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html">About Us</a></li>
+    <li class="dropdown">
+      <a href="#" class="dropdown-toggle">Programs</a>
+      <ul class="dropdown-menu">
+        <li><a href="education (1).html">Education</a></li>
+        <li><a href="medical (1).html">Medical Care</a></li>
+        <li><a href="nutrition (1).html">Nutrition</a></li>
+        <li><a href="spiritual (1).html">Spiritual Growth</a></li>
+        <li><a href="vocational.html">Vocational Training</a></li>
+        <li><a href="haven.html">Safe Haven</a></li>
+      </ul>
+    </li>
+    <li class="dropdown">
+      <a href="#" class="dropdown-toggle">Get Involved</a>
+      <ul class="dropdown-menu">
+        <li><a href="volunteer.html">Volunteer</a></li>
+        <li><a href="donate.html" class="active">Give / Donate</a></li>
+      </ul>
+    </li>
+    <li><a href="about.html#gallery">Gallery</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="drawer-backdrop" id="drawerBackdrop" onclick="closeMenu()"></div>
+
+<div class="mobile-nav" id="mobileNav" role="navigation" aria-label="Mobile navigation">
+  <div class="drawer-header">
+    <div class="drawer-logo">
+      <strong>Light & Glory</strong>
+      Orphanage School Namutumba
+    </div>
+    <button class="mobile-nav-close" onclick="closeMenu()" aria-label="Close menu"></button>
+  </div>
+  <div class="drawer-links">
+    <a href="index.html" onclick="closeMenu()">Home</a>
+    <a href="about.html" onclick="closeMenu()">About Us</a>
+
+    <div class="mobile-dropdown">
+      <a href="#" class="mobile-dropdown-toggle" onclick="toggleMobileDropdown(event)">Programs</a>
+      <div class="mobile-dropdown-content" id="mobilePrograms">
+        <a href="education (1).html" onclick="closeMenu()">Education</a>
+        <a href="medical (1).html" onclick="closeMenu()">Medical Care</a>
+        <a href="nutrition (1).html" onclick="closeMenu()">Nutrition</a>
+        <a href="spiritual (1).html" onclick="closeMenu()">Spiritual Growth</a>
+        <a href="vocational.html" onclick="closeMenu()">Vocational Training</a>
+        <a href="haven.html" onclick="closeMenu()">Safe Haven</a>
+      </div>
+    </div>
+
+    <div class="mobile-dropdown">
+      <a href="#" class="mobile-dropdown-toggle" onclick="toggleMobileDropdown(event)">Get Involved</a>
+      <div class="mobile-dropdown-content">
+        <a href="volunteer.html" onclick="closeMenu()">Volunteer</a>
+        <a href="donate.html" onclick="closeMenu()">Give / Donate</a>
+      </div>
+    </div>
+    <a href="about.html#gallery" onclick="closeMenu()">Gallery</a>
+    <a href="contact.html" class="m-contact" onclick="closeMenu()">Contact</a>
+  </div>
+</div>
 
 <!-- HERO BANNER -->
 <div class="hero-banner">
@@ -121,9 +199,9 @@
       <!-- Payment method selection -->
       <span class="pay-label">Choose how to pay</span>
       <div class="pay-methods">
-        <button class="pay-btn selected" onclick="selectPay(this, 'flutterwave')">
-          <div class="pay-btn__logo"><span class="fw-logo">flw</span></div>
-          <span class="pay-btn__label">Flutterwave</span>
+        <button class="pay-btn selected" onclick="selectPay(this, 'pesapal')">
+          <div class="pay-btn__logo"><span class="fw-logo">psp</span></div>
+          <span class="pay-btn__label">Pesapal</span>
         </button>
         <button class="pay-btn" onclick="selectPay(this, 'paypal')">
           <div class="pay-btn__logo"><span class="pp-logo">PayPal</span></div>
@@ -159,7 +237,7 @@
     </div>
 
     <!-- ═══════════════════════════════════════════════════ -->
-    <!-- SUCCESS STATE — shown after Flutterwave confirms   -->
+    <!-- SUCCESS STATE — shown after Pesapal confirms       -->
     <!-- ═══════════════════════════════════════════════════ -->
     <div class="success-state" id="successState">
       <div class="success-circle">🙏</div>
@@ -425,7 +503,7 @@
         </div>
         <div class="trust-item">
           <div class="trust-icon">🔒</div>
-          Secure payments via Flutterwave &amp; PayPal
+          Secure payments via Pesapal &amp; PayPal
         </div>
         <div class="trust-item">
           <div class="trust-icon">📧</div>
@@ -454,14 +532,18 @@
 // ============================================================
 // LIGHT & GLORY ORPHANAGE SCHOOL — DONATION PAGE JAVASCRIPT
 // Fixed: PayPal flow, Mobile Money flow, Monthly logic,
-//        Flutterwave verification, tx_ref uniqueness
+//        Pesapal verification, tx_ref uniqueness
 // ============================================================
 
 // ── CONFIG ──────────────────────────────────────────────────
-// Swap this with the client's real Public Key once they send it.
-// Test key  → starts with FLWPUBK_TEST-
-// Live key  → starts with FLWPUBK-  (no _TEST)
-const FLW_PUBLIC_KEY = "FLWPUBK_TEST-xxxxxxxxxxxxxxxxxxxx-X";
+// Pesapal keys — get these from your Pesapal dashboard after signup
+// Sandbox (test): https://cybqa.pesapal.com
+// Live: https://www.pesapal.com
+const PESAPAL_CONSUMER_KEY = "YOUR_PESAPAL_CONSUMER_KEY"; // ← paste your Consumer Key here (safe to be in frontend)
+const PESAPAL_ENV = "sandbox"; // ← change to "live" when going live
+
+// Your Supabase Edge Function URL — this keeps your Consumer Secret safe on the server
+const SUPABASE_EDGE_FUNCTION_URL = "https://jebencmorwugfhjulnus.supabase.co/functions/v1/clever-action";
 
 // Replace with your Make.com webhook URL
 // How: Make.com → New Scenario → Webhooks → Custom Webhook → Copy URL
@@ -473,17 +555,38 @@ const PAYPAL_BUTTON_ID = "YOUR_PAYPAL_BUTTON_ID";
 
 // Mobile money instructions shown to donor after they choose MM
 const MOBILE_MONEY = {
-  number:   "07",   // ← replace with client's actual MM number
+  number:   "0700 000 000",   // ← replace with client's actual MM number
   provider: "MTN Mobile Money",
   name:     "Light & Glory Orphanage School"
 };
+
+// ── SUPABASE CONFIG ──────────────────────────────────────────
+const SUPABASE_URL = "https://jebencmorwugfhjulnus.supabase.co";
+const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImplYmVuY21vcnd1Z2ZoanVsbnVzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzgwMDU0NjQsImV4cCI6MjA5MzU4MTQ2NH0.JowepYmCvKq6WPI_DBQbLSiB2dHNd83IJplNvPUKVbQ";
+const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+// ── EMAILJS CONFIG ───────────────────────────────────────────
+// 1. Go to https://www.emailjs.com and create a free account
+// 2. Add an Email Service (Gmail recommended) → copy Service ID
+// 3. Create two Email Templates (donor receipt + admin alert) → copy Template IDs
+// 4. Go to Account → copy your Public Key
+const EMAILJS_PUBLIC_KEY   = "YOUR_EMAILJS_PUBLIC_KEY";   // ← from EmailJS Account page
+const EMAILJS_SERVICE_ID   = "YOUR_SERVICE_ID";           // ← e.g. "service_abc123"
+const EMAILJS_DONOR_TEMPLATE  = "YOUR_DONOR_TEMPLATE_ID"; // ← thank-you email to donor
+const EMAILJS_ADMIN_TEMPLATE  = "YOUR_ADMIN_TEMPLATE_ID"; // ← notification email to admin
+const ADMIN_EMAIL = "admin@lightandglory.org";            // ← replace with real admin email
+
+// Initialize EmailJS safely
+if (typeof emailjs !== "undefined") {
+  emailjs.init(EMAILJS_PUBLIC_KEY);
+}
 // ────────────────────────────────────────────────────────────
 
 
 // ── STATE ────────────────────────────────────────────────────
 let selectedAmount = 25;
 let selectedFreq   = "once";
-let selectedPay    = "flutterwave";
+let selectedPay    = "pesapal";
 // ────────────────────────────────────────────────────────────
 
 
@@ -599,8 +702,8 @@ function handleDonate() {
 
   const { firstName, lastName, email, phone, amt } = form;
 
-  if (selectedPay === "flutterwave") {
-    handleFlutterwave({ firstName, lastName, email, phone, amt });
+  if (selectedPay === "pesapal") {
+    handlePesapal({ firstName, lastName, email, phone, amt });
 
   } else if (selectedPay === "paypal") {
     handlePayPal({ firstName, lastName, email, amt });
@@ -612,66 +715,110 @@ function handleDonate() {
 // ────────────────────────────────────────────────────────────
 
 
-// ── FLUTTERWAVE HANDLER ──────────────────────────────────────
-// Covers both one-time and monthly donations.
-// Monthly = Flutterwave Payment Plan (requires plan ID from dashboard).
-function handleFlutterwave({ firstName, lastName, email, phone, amt }) {
+// ── PESAPAL HANDLER ─────────────────────────────────────────
+// Calls Supabase Edge Function which securely gets the Pesapal
+// iframe URL using your Consumer Key & Secret stored server-side.
+// Supports: MTN Mobile Money, Airtel Money, Visa, Mastercard
+async function handlePesapal({ firstName, lastName, email, phone, amt }) {
   const txRef = generateTxRef("LGO");
-
-  // ── MONTHLY via Flutterwave Payment Plan ──────────────────
-  // To enable real recurring charges:
-  // 1. Go to Flutterwave Dashboard → Payment Plans → Create Plan
-  // 2. Set interval: monthly, amount: leave blank (donor sets it), currency: USD
-  // 3. Copy the Plan ID and paste it below
-  // 4. Uncomment the payment_plan line
-  // Without a plan ID, monthly acts like a one-time charge with a note.
   const isMonthly = selectedFreq === "monthly";
-  const description = isMonthly
-    ? "Monthly recurring donation for orphaned children"
-    : "One-time donation for orphaned children";
 
-  FlutterwaveCheckout({
-    public_key:      FLW_PUBLIC_KEY,
-    tx_ref:          txRef,
-    amount:          amt,
-    currency:        "USD",
-    payment_options: "card, mobilemoney, ussd, banktransfer",
-    // payment_plan: "YOUR_PLAN_ID_HERE", // ← uncomment for true monthly recurring
-    customer: {
-      email,
-      phone_number: phone,
-      name: `${firstName} ${lastName}`
-    },
-    customizations: {
-      title:       "Light & Glory Orphanage School",
-      description,
-      logo:        "https://lightandglory.org/lightandglorylogo.png"
-    },
-    callback: function(data) {
-      // data.status from the popup is NOT enough to confirm payment.
-      // We log it here, but ideally verify server-side using the tx_ref.
-      if (data.status === "successful" || data.status === "completed") {
+  // Show loading state on the button
+  const submitBtn = document.querySelector(".submit-btn");
+  const submitLabel = document.getElementById("submitLabel");
+  const originalLabel = submitLabel.textContent;
+  submitBtn.disabled = true;
+  submitLabel.textContent = "Opening payment...";
+
+  try {
+    // Call Supabase Edge Function — secret key never touches the browser
+    const response = await fetch(SUPABASE_EDGE_FUNCTION_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ firstName, lastName, email, phone, amount: amt, txRef })
+    });
+
+    const data = await response.json();
+
+    if (!data.iframe_url) {
+      submitBtn.disabled = false;
+      submitLabel.textContent = originalLabel;
+      showError("Could not connect to payment. Please try again.\n\nDetails: " + (data.error || "Unknown error"));
+      return;
+    }
+
+    // Store tracking ID so we can verify after payment
+    localStorage.setItem("order_tracking_id", data.order_tracking_id);
+    localStorage.setItem("tx_ref", txRef);
+
+    // Build and show the payment modal with the Pesapal iframe
+    const modal = document.createElement("div");
+    modal.id = "pesapalModal";
+    modal.style.cssText = `
+      position:fixed; top:0; left:0; width:100%; height:100%;
+      background:rgba(0,0,0,0.7); z-index:9999;
+      display:flex; align-items:center; justify-content:center;
+    `;
+
+    const modalContent = document.createElement("div");
+    modalContent.style.cssText = `
+      background:#fff; border-radius:12px; padding:20px;
+      width:90%; max-width:520px; max-height:92vh;
+      overflow-y:auto; position:relative;
+    `;
+
+    const closeBtn = document.createElement("button");
+    closeBtn.textContent = "✕ Close";
+    closeBtn.style.cssText = `
+      position:absolute; top:10px; right:10px;
+      background:#f44336; color:#fff; border:none;
+      padding:6px 12px; border-radius:6px; cursor:pointer; z-index:1;
+    `;
+    closeBtn.onclick = () => {
+      document.body.removeChild(modal);
+      submitBtn.disabled = false;
+      submitLabel.textContent = originalLabel;
+    };
+
+    const iframe = document.createElement("iframe");
+    iframe.src = data.iframe_url;
+    iframe.style.cssText = "width:100%; height:520px; border:none; margin-top:10px;";
+
+    // Listen for Pesapal payment confirmation message from iframe
+    window.addEventListener("message", function pesapalListener(event) {
+      if (event.data && event.data.pesapal_transaction_tracking_id) {
+        window.removeEventListener("message", pesapalListener);
+        if (document.getElementById("pesapalModal")) {
+          document.body.removeChild(modal);
+        }
         showSuccess({
-          ref:     data.transaction_id || txRef,
-          method:  "flutterwave",
+          ref:       event.data.pesapal_merchant_reference || txRef,
+          method:    "pesapal",
           amt,
           email,
           firstName,
           lastName,
           phone,
           isMonthly,
-          verified: false // set to true only after backend verification
+          verified:  true
         });
-      } else {
-        // Payment failed or was declined
-        showError("Payment was not completed. Please try again.");
       }
-    },
-    onclose: function() {
-      // Donor closed the popup without paying — do nothing
-      console.log("Flutterwave popup closed by donor.");
-    }
-  });
+    });
+
+    modalContent.appendChild(closeBtn);
+    modalContent.appendChild(iframe);
+    modal.appendChild(modalContent);
+    document.body.appendChild(modal);
+
+  } catch (err) {
+    submitBtn.disabled = false;
+    submitLabel.textContent = originalLabel;
+    showError("Payment failed to load. Check your internet connection and try again.");
+    console.error("Pesapal Edge Function error:", err);
+  } finally {
+    submitBtn.disabled = false;
+    submitLabel.textContent = originalLabel;
+  }
 }
 // ────────────────────────────────────────────────────────────
 
@@ -716,6 +863,18 @@ function handleMobileMoney({ firstName, lastName, email, phone, amt }) {
     phone
   });
 
+  // Save PENDING donation to Supabase
+  saveDonation({
+    reference:     mmRef,
+    firstName,
+    lastName,
+    email,
+    amount:        amt,
+    campaign:      "general",
+    status:        "pending",
+    paymentMethod: "mobilemoney"
+  });
+
   // Log the PENDING donation to Make.com so the client can follow up
   sendToMake({
     reference:      mmRef,
@@ -743,7 +902,30 @@ function showSuccess({ ref, method, amt, email, firstName, lastName, phone, isMo
   document.querySelector(".donate-card__body").style.display = "none";
   document.getElementById("successState").classList.add("show");
 
-  // Send confirmed donation to Make.com → Google Sheets + Brevo
+  // 1. Save to Supabase
+  saveDonation({
+    reference:     refCode,
+    firstName,
+    lastName,
+    email,
+    amount:        amt,
+    campaign:      isMonthly ? "monthly-giving" : "general",
+    status:        "completed",
+    paymentMethod: method
+  });
+
+  // 2. Send thank-you email to donor + alert to admin
+  sendEmails({
+    firstName,
+    lastName,
+    email,
+    amt,
+    reference: refCode,
+    method,
+    status:    "completed"
+  });
+
+  // 3. Send to Make.com → Google Sheets + Brevo
   sendToMake({
     reference:      refCode,
     amount:         amt,
@@ -847,6 +1029,71 @@ function showError(message) {
 // ────────────────────────────────────────────────────────────
 
 
+// ── SAVE TO SUPABASE ─────────────────────────────────────────
+async function saveDonation({ reference, firstName, lastName, email, phone, amount, campaign, status, paymentMethod }) {
+  try {
+    const { error } = await supabaseClient
+      .from("payments")                      // ← matches your Supabase table name
+      .insert([{
+        full_name:      `${firstName} ${lastName}`,
+        email:          email,
+        phone:          phone || "",
+        amount:         amount,
+        currency:       "USD",
+        transaction_id: reference,
+        status:         status || "pending",
+        payment_method: paymentMethod || ""
+      }]);
+
+    if (error) {
+      console.error("❌ Supabase insert error:", error.message);
+    } else {
+      console.log("✅ Donation saved to Supabase:", reference);
+    }
+  } catch (err) {
+    console.error("❌ Supabase error:", err);
+  }
+}
+// ────────────────────────────────────────────────────────────
+
+
+// ── SEND EMAILS (donor thank-you + admin alert) ──────────────
+async function sendEmails({ firstName, lastName, email, amt, reference, method, status }) {
+  // 1. Thank-you email to donor
+  try {
+    await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_DONOR_TEMPLATE, {
+      donor_name:    `${firstName} ${lastName}`,
+      donor_email:   email,
+      amount:        `$${amt}`,
+      reference:     reference,
+      payment_method: method,
+      organization:  "Light & Glory Transformation Ministries Orphanage School"
+    });
+    console.log("✅ Thank-you email sent to donor:", email);
+  } catch (err) {
+    console.error("❌ Donor email failed:", err);
+  }
+
+  // 2. Notification email to admin
+  try {
+    await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_ADMIN_TEMPLATE, {
+      admin_email:   ADMIN_EMAIL,
+      donor_name:    `${firstName} ${lastName}`,
+      donor_email:   email,
+      amount:        `$${amt}`,
+      reference:     reference,
+      payment_method: method,
+      status:        status,
+      donated_at:    new Date().toLocaleString("en-UG", { timeZone: "Africa/Kampala" })
+    });
+    console.log("✅ Admin notification email sent");
+  } catch (err) {
+    console.error("❌ Admin email failed:", err);
+  }
+}
+// ────────────────────────────────────────────────────────────
+
+
 // ── MAKE.COM WEBHOOK ─────────────────────────────────────────
 async function sendToMake(donationData) {
   try {
@@ -900,14 +1147,13 @@ async function sendToMake(donationData) {
   NOTE ON MONTHLY DONATIONS:
   ──────────────────────────
   The monthly toggle currently works as a label — it adds a note to the
-  Flutterwave popup and logs "monthly" to Make.com/Google Sheets.
+  Pesapal checkout and logs "monthly" to Make.com/Google Sheets.
   For TRUE auto-recurring charges (card billed every month automatically):
-  1. Go to Flutterwave Dashboard → Payment Plans → Create a Plan
+  1. Go to Pesapal Dashboard → Recurring Payments → Create a Plan
   2. Set: monthly interval, USD, give it a name
   3. Copy the Plan ID
-  4. In handleFlutterwave() above, uncomment the payment_plan line
-     and replace "YOUR_PLAN_ID_HERE" with the real ID
-  This requires the client to have a verified live Flutterwave account.
+  4. In handlePesapal() above, pass the plan ID in the order params
+  This requires the client to have a verified live Pesapal account.
 */
 </script>
 </body>

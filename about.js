@@ -199,3 +199,15 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 
 });
+
+// ── Mobile Dropdown ──────────────────────────────────────────
+function toggleMobileDropdown(e) {
+  e.preventDefault();
+  const toggle = e.currentTarget;
+  const content = toggle.nextElementSibling;
+
+  if (content && content.classList.contains('mobile-dropdown-content')) {
+    content.classList.toggle('open');
+    toggle.classList.toggle('active');
+  }
+}
