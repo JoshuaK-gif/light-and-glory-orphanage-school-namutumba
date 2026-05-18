@@ -11,11 +11,22 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
       --gold:   #c9933a;
+      --gold-light: #d4a659;
+      --gold-pale: #f5edd6;
+      --gold-glow: rgba(201,147,58,0.3);
+      --sky: #0098C8;
+      --sky-light: #5eb8d9;
+      --sky-glow: rgba(0,152,200,0.3);
+      --navy: #0d1b2a;
       --dark:   #1a1a2e;
       --cream:  #fdf6ec;
       --text:   #3b3b3b;
       --white:  #ffffff;
       --radius: 8px;
+      --nav-h: 84px;
+      --nav-h-sm: 68px;
+      --transition: all 0.3s ease;
+      --ease: cubic-bezier(0.4, 0, 0.2, 1);
     }
     body { font-family: 'Lato', sans-serif; color: var(--text); background: var(--cream); }
 
@@ -378,66 +389,83 @@
 }
 
     /* ── HERO ── */
-     .hero {
-      position: relative; height: 72vh; min-height: 420px;
-      display: flex; align-items: center; justify-content: center; text-align: center;
+    .hero {
+      position: relative;
+      margin-top: var(--nav-h);
+      min-height: 420px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
       overflow: hidden;
     }
     .hero-bg {
-      position: absolute; inset: 0;
+      position: absolute;
+      inset: 0;
       background-image: url("light1.jpeg");
       background-size: cover;
-      background-position: center 40%;
+      background-position: center top;
       background-repeat: no-repeat;
-      transform: scale(1.05);
-      animation: heroZoom 14s ease-out forwards;
+      z-index: 0;
+      filter: brightness(0.55) saturate(0.85);
     }
-    .hero-bg::after {
-      content: '';
-      position: absolute; inset: 0;
-      background: linear-gradient(
-        170deg,
-        rgba(13, 27, 42, 0.82) 0%,
-        rgba(13, 27, 42, 0.50) 45%,
-        rgba(26, 92, 42, 0.72) 100%
-      );
-    }
-    @keyframes heroZoom {
-      from { transform: scale(1.05); }
-      to   { transform: scale(1.00); }
-    }
-    /* Sky-blue accent bar at bottom of hero */
     .hero::after {
       content: '';
       position: absolute; bottom: 0; left: 0; right: 0;
-      height: 5px;
+      height: 4px;
       background: linear-gradient(90deg, var(--gold), var(--sky), var(--gold));
+      z-index: 2;
     }
-    .hero-content { position: relative; z-index: 1; padding: 0 1.5rem; }
-      to   { opacity: 1; transform: translateY(0); }
-    
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      color: var(--white);
+      max-width: 800px;
+      padding: 80px 52px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
     .hero-tag {
-      display: inline-block; margin-bottom: 0.8rem;
-      font-family: 'Lato', sans-serif; font-size: 0.72rem; font-weight: 700;
-      letter-spacing: 0.22em; text-transform: uppercase; color: var(--sky-light);
-      border: 1px solid var(--sky-light); border-radius: 20px; padding: 4px 16px;
-      animation: fadeUp 0.9s 0.2s ease both;
+      display: inline-block;
+      margin-bottom: 1.4rem;
+      font-family: 'Lato', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--white);
+      border: 1px solid rgba(255,255,255,0.6);
+      border-radius: 20px;
+      padding: 5px 20px;
     }
+
     .hero h1 {
-      font-family: 'Cinzel', serif; font-size: clamp(2rem, 5vw, 3.6rem);
-      font-weight: 700; color: var(--white); line-height: 1.15;
-      text-shadow: 0 2px 20px rgba(0,0,0,0.6);
-      animation: fadeUp 0.9s 0.35s ease both;
+      font-family: 'Cinzel', serif;
+      font-size: clamp(2.4rem, 5.5vw, 4rem);
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: 1.2rem;
+      text-shadow: 0 2px 24px rgba(0,0,0,0.5);
     }
-    .hero h1 span { color: var(--gold-light); }
+    .hero h1 .white-part { color: var(--white); }
+    .hero h1 .gold-part  { color: var(--gold); }
+
     .hero p {
-      margin-top: 1rem; font-size: 1.12rem; color: rgba(255,255,255,0.82);
-      max-width: 540px; margin-left: auto; margin-right: auto; line-height: 1.7;
-      animation: fadeUp 0.9s 0.5s ease both;
+      font-size: 1.1rem;
+      color: rgba(255,255,255,0.88);
+      line-height: 1.7;
+      max-width: 580px;
+      margin: 0 auto;
     }
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(18px); }
-      to   { opacity: 1; transform: translateY(0); }
+
+    .hero-divider { display: none; }
+
+    @media (max-width: 900px) {
+      .hero { min-height: 360px; }
+      .hero-content { padding: 60px 28px; }
+      .hero h1 { font-size: 2rem; }
     }
 
    
@@ -846,12 +874,13 @@
 </div>
 
 <section class="hero">
+  <div class="hero-bg"></div>
   <div class="hero-content">
-    <div class="hero-icon">🛠️</div>
     <div class="hero-tag">Our Programs</div>
-    <h1>Vocational Skills Training</h1>
+    <h1>
+      <span class="white-part">Vocational Skills </span><span class="gold-part">Training</span>
+    </h1>
     <p>Equipping older children with hands-on skills for independence, productivity, and self-reliance.</p>
-    <div class="hero-divider"></div>
   </div>
 </section>
 
