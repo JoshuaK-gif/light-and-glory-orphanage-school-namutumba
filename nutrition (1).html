@@ -365,10 +365,31 @@
 .mobile-nav .m-donate::before { background: var(--gold) !important; }
 .mobile-nav .m-donate:hover::before { opacity: 1; }
 
-.mobile-nav .m-contact { color: var(--sky) !important; border-bottom: none; }
-.mobile-nav .m-contact:hover { color: var(--sky) !important; background: rgba(0,152,200,0.08); padding-left: 32px; }
-.mobile-nav .m-contact::before { background: var(--sky) !important; }
-.mobile-nav .m-contact:hover::before { opacity: 1; }
+.mobile-nav .m-contact {
+  background: #0098C8;
+  background: var(--sky, #0098C8);
+  color: #fff !important;
+  margin: 12px 28px;
+  border-radius: 8px;
+  justify-content: center;
+  padding: 12px !important;
+  box-shadow: 0 4px 12px rgba(0, 152, 200, 0.2);
+  transform: translateX(0) !important;
+  opacity: 1 !important;
+  transition: all 0.3s ease !important;
+}
+
+.mobile-nav .m-contact:hover {
+  background: #0E7A95;
+  background: var(--sky-dark, #0E7A95);
+  color: #fff !important;
+  transform: translateY(-2px) !important;
+  padding-left: 12px !important;
+}
+
+.mobile-nav .m-contact::before {
+  display: none;
+}
 
 /* MOBILE DROPDOWN */
 .mobile-dropdown {
@@ -1108,6 +1129,16 @@
   hamburger.addEventListener('click', () => {
     hamburger.classList.contains('open') ? closeMenu() : openMenu();
   });
+
+  function toggleMobileDropdown(e) {
+    e.preventDefault();
+    const toggle = e.currentTarget;
+    const content = toggle.nextElementSibling;
+    if (content && content.classList.contains('mobile-dropdown-content')) {
+      content.classList.toggle('open');
+      toggle.classList.toggle('active');
+    }
+  }
 </script>
 </body>
 </html>

@@ -1,10 +1,4 @@
-/* ══════════════════════════════
-   ROOT VARIABLES
-══════════════════════════════ */
 
-/* ══════════════════════════════
-   ROOT VARIABLES
-══════════════════════════════ */
 
 :root {
   --gold:          #D4860A;
@@ -363,15 +357,39 @@ h1, h2, h3, h4, h5, h6 {
 .mobile-nav.open a:nth-child(3) { transform: translateX(0); opacity: 1; transition-delay: 0.22s; }
 .mobile-nav.open a:nth-child(4) { transform: translateX(0); opacity: 1; transition-delay: 0.28s; }
 .mobile-nav.open a:nth-child(5) { transform: translateX(0); opacity: 1; transition-delay: 0.34s; }
+.mobile-nav.open a:nth-child(6) { transform: translateX(0); opacity: 1; transition-delay: 0.40s; }
 .mobile-nav .m-donate { color: var(--gold) !important; border-bottom: none; }
 .mobile-nav .m-donate:hover { color: var(--gold) !important; background: rgba(212,134,10,0.08); padding-left: 32px; }
 .mobile-nav .m-donate::before { background: var(--gold) !important; }
 .mobile-nav .m-donate:hover::before { opacity: 1; }
 
-.mobile-nav .m-contact { color: var(--sky) !important; border-bottom: none; }
-.mobile-nav .m-contact:hover { color: var(--sky) !important; background: rgba(0,152,200,0.08); padding-left: 32px; }
-.mobile-nav .m-contact::before { background: var(--sky) !important; }
-.mobile-nav .m-contact:hover::before { opacity: 1; }
+.mobile-nav .m-contact {
+  background: var(--gold);
+  color: var(--white) !important;
+  margin: 12px 28px;
+  border-radius: 2px;
+  justify-content: center;
+  padding: 9px 22px !important;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  box-shadow: 0 2px 12px var(--gold-glow);
+  transform: translateX(0) !important;
+  opacity: 1 !important;
+  transition: background 0.22s, box-shadow 0.22s, transform 0.18s !important;
+}
+
+.mobile-nav .m-contact:hover {
+  background: var(--sky);
+  color: var(--white) !important;
+  box-shadow: 0 4px 20px var(--sky-glow);
+  transform: translateY(-1px) !important;
+  padding-left: 22px !important;
+}
+
+.mobile-nav .m-contact::before {
+  display: none;
+}
 
 /* MOBILE DROPDOWN */
 .mobile-dropdown {

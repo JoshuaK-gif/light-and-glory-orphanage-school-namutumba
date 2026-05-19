@@ -4,8 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Medical Care – Light & Glory Orphanage School</title>
+  <link rel="stylesheet" href="style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet"/>
  <script src="nav.js" defer></script>
+ <script src="script.js" defer></script>
  <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
@@ -358,15 +360,12 @@
 .mobile-nav.open a:nth-child(3) { transform: translateX(0); opacity: 1; transition-delay: 0.22s; }
 .mobile-nav.open a:nth-child(4) { transform: translateX(0); opacity: 1; transition-delay: 0.28s; }
 .mobile-nav.open a:nth-child(5) { transform: translateX(0); opacity: 1; transition-delay: 0.34s; }
+.mobile-nav.open a:nth-child(6) { transform: translateX(0); opacity: 1; transition-delay: 0.40s; }
 .mobile-nav .m-donate { color: var(--gold) !important; border-bottom: none; }
 .mobile-nav .m-donate:hover { color: var(--gold) !important; background: rgba(212,134,10,0.08); padding-left: 32px; }
 .mobile-nav .m-donate::before { background: var(--gold) !important; }
 .mobile-nav .m-donate:hover::before { opacity: 1; }
 
-.mobile-nav .m-contact { color: var(--sky) !important; border-bottom: none; }
-.mobile-nav .m-contact:hover { color: var(--sky) !important; background: rgba(0,152,200,0.08); padding-left: 32px; }
-.mobile-nav .m-contact::before { background: var(--sky) !important; }
-.mobile-nav .m-contact:hover::before { opacity: 1; }
 
 /* MOBILE DROPDOWN */
 .mobile-dropdown {
@@ -403,7 +402,7 @@
     /* ── HERO ── */
     .hero {
       position: relative; height: 72vh; min-height: 420px;
-      display: flex; align-items: center; justify-content: center; text-align: center;
+      display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;
       overflow: hidden;
     }
     .hero-bg {
@@ -435,7 +434,17 @@
       height: 5px;
       background: linear-gradient(90deg, var(--sky), var(--gold), var(--sky));
     }
-    .hero-content { position: relative; z-index: 1; padding: 0 1.5rem; }
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      padding: 0 1.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      text-align: center;
+    }
     .hero-tag {
       display: inline-block; margin-bottom: 0.8rem;
       font-family: 'Lato', sans-serif; font-size: 0.72rem; font-weight: 700;

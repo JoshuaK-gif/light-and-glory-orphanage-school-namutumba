@@ -6,7 +6,8 @@
   <title>Safe Haven – Light & Glory Orphanage School</title>
   <link rel="stylesheet" href="style.css"/>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet"/>
-  <script  src="nav.js"></script>
+  <script src="nav.js" defer></script>
+  <script src="script.js" defer></script>
   <style>
       *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
@@ -345,15 +346,11 @@
 .mobile-nav.open a:nth-child(3) { transform: translateX(0); opacity: 1; transition-delay: 0.22s; }
 .mobile-nav.open a:nth-child(4) { transform: translateX(0); opacity: 1; transition-delay: 0.28s; }
 .mobile-nav.open a:nth-child(5) { transform: translateX(0); opacity: 1; transition-delay: 0.34s; }
+.mobile-nav.open a:nth-child(6) { transform: translateX(0); opacity: 1; transition-delay: 0.40s; }
 .mobile-nav .m-donate { color: var(--gold) !important; border-bottom: none; }
 .mobile-nav .m-donate:hover { color: var(--gold) !important; background: rgba(212,134,10,0.08); padding-left: 32px; }
 .mobile-nav .m-donate::before { background: var(--gold) !important; }
 .mobile-nav .m-donate:hover::before { opacity: 1; }
-
-.mobile-nav .m-contact { color: var(--sky) !important; border-bottom: none; }
-.mobile-nav .m-contact:hover { color: var(--sky) !important; background: rgba(0,152,200,0.08); padding-left: 32px; }
-.mobile-nav .m-contact::before { background: var(--sky) !important; }
-.mobile-nav .m-contact:hover::before { opacity: 1; }
 
 /* MOBILE DROPDOWN */
 .mobile-dropdown {
@@ -1057,5 +1054,75 @@
   </div>
 </footer>
 
+<script>
+  const hamburger = document.getElementById('hamburger');
+  const mobileNav = document.getElementById('mobileNav');
+  const drawerBackdrop = document.getElementById('drawerBackdrop');
+  const navbar = document.getElementById('navbar');
+
+  /* ── Scroll: shrink navbar ── */
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 40);
+  }, { passive: true });
+
+  /* ── Stagger mobile menu children on open ── */
+  function staggerChildren(open) {
+    const items = mobileNav.querySelectorAll('.drawer-links > *, .mobile-dropdown');
+    items.forEach((el, i) => {
+      el.style.transition = 'opacity 0.35s ease, transform 0.38s cubic-bezier(0.4,0,0.2,1)';
+      if (open) {
+        el.style.transitionDelay = (0.08 + i * 0.06) + 's';
+        el.style.opacity = '1';
+        el.style.transform = 'translateX(0)';
+      } else {
+        el.style.transitionDelay = '0s';
+        el.style.opacity = '0';
+        el.style.transform = 'translateX(24px)';
+      }
+    });
+  }
+
+  function resetChildren() {
+    const items = mobileNav.querySelectorAll('.drawer-links > *, .mobile-dropdown');
+    items.forEach(el => {
+      el.style.transition = 'none';
+      el.style.opacity = '0';
+      el.style.transform = 'translateX(24px)';
+    });
+  }
+
+  function openMenu() {
+    resetChildren();
+    mobileNav.classList.add('open');
+    drawerBackdrop.classList.add('open');
+    hamburger.classList.add('open');
+    hamburger.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
+    setTimeout(() => staggerChildren(true), 60);
+  }
+
+  function closeMenu() {
+    staggerChildren(false);
+    mobileNav.classList.remove('open');
+    drawerBackdrop.classList.remove('open');
+    hamburger.classList.remove('open');
+    hamburger.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  }
+
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.contains('open') ? closeMenu() : openMenu();
+  });
+
+  function toggleMobileDropdown(e) {
+    e.preventDefault();
+    const toggle = e.currentTarget;
+    const content = toggle.nextElementSibling;
+    if (content && content.classList.contains('mobile-dropdown-content')) {
+      content.classList.toggle('open');
+      toggle.classList.toggle('active');
+    }
+  }
+</script>
 </body>
 </html>
