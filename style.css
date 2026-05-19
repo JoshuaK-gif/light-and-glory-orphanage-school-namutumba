@@ -364,16 +364,16 @@ h1, h2, h3, h4, h5, h6 {
 .mobile-nav .m-donate:hover::before { opacity: 1; }
 
 .mobile-nav .m-contact {
-  background: var(--gold);
-  color: var(--white) !important;
+  
+  
   margin: 12px 28px;
-  border-radius: 2px;
-  justify-content: center;
+
+  justify-content: flex-start;
   padding: 9px 22px !important;
   font-weight: 700;
   letter-spacing: 2px;
   text-transform: uppercase;
-  box-shadow: 0 2px 12px var(--gold-glow);
+  
   transform: translateX(0) !important;
   opacity: 1 !important;
   transition: background 0.22s, box-shadow 0.22s, transform 0.18s !important;

@@ -8,6 +8,201 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Lato:wght@300;400;700&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="donate.css">
+<style>
+/* ═══════════════════════════════════════════════════════════
+   ENHANCED DONATE BUTTON STYLING
+   ═══════════════════════════════════════════════════════════ */
+
+.submit-btn {
+  position: relative;
+  width: 100%;
+  padding: 18px 32px;
+  margin-top: 24px;
+  
+  /* Modern gradient background */
+  background: linear-gradient(135deg, #d4af37 0%, #f4d03f 50%, #d4af37 100%);
+  background-size: 200% 100%;
+  
+  /* Smooth borders */
+  border: none;
+  border-radius: 12px;
+  
+  /* Text styling */
+  font-family: 'Lato', sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: #1a1a1a;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  
+  /* Shadow for depth */
+  box-shadow: 
+    0 4px 15px rgba(212, 175, 55, 0.4),
+    0 2px 8px rgba(0, 0, 0, 0.1);
+  
+  /* Smooth transitions */
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  
+  cursor: pointer;
+  overflow: hidden;
+  
+  /* Flex for icon alignment */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+/* Icon styling */
+.submit-btn__icon {
+  font-size: 22px;
+  animation: heartbeat 2s ease-in-out infinite;
+}
+
+/* Text wrapper */
+.submit-btn__text {
+  position: relative;
+  z-index: 2;
+}
+
+/* Animated shine effect */
+.submit-btn__shine {
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.4) 50%,
+    transparent 100%
+  );
+  transform: skewX(-25deg);
+  transition: left 0.6s ease;
+}
+
+/* Hover effects */
+.submit-btn:hover {
+  background-position: 100% 0;
+  transform: translateY(-2px);
+  box-shadow: 
+    0 8px 25px rgba(212, 175, 55, 0.5),
+    0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.submit-btn:hover .submit-btn__shine {
+  left: 150%;
+}
+
+/* Active (pressed) state */
+.submit-btn:active {
+  transform: translateY(0);
+  box-shadow: 
+    0 2px 10px rgba(212, 175, 55, 0.3),
+    0 1px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Focus state for accessibility */
+.submit-btn:focus {
+  outline: 3px solid rgba(212, 175, 55, 0.5);
+  outline-offset: 2px;
+}
+
+/* Disabled state */
+.submit-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.submit-btn:disabled:hover {
+  transform: none;
+  box-shadow: 
+    0 4px 15px rgba(212, 175, 55, 0.4),
+    0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Heartbeat animation for icon */
+@keyframes heartbeat {
+  0%, 100% {
+    transform: scale(1);
+  }
+  10%, 30% {
+    transform: scale(1.1);
+  }
+  20%, 40% {
+    transform: scale(1);
+  }
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .submit-btn {
+    padding: 16px 24px;
+    font-size: 16px;
+  }
+  
+  .submit-btn__icon {
+    font-size: 20px;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   ALTERNATIVE COLOR SCHEMES (commented out - uncomment to use)
+   ═══════════════════════════════════════════════════════════ */
+
+/* Green Compassion Theme */
+/*
+.submit-btn {
+  background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);
+  box-shadow: 
+    0 4px 15px rgba(46, 204, 113, 0.4),
+    0 2px 8px rgba(0, 0, 0, 0.1);
+  color: white;
+}
+
+.submit-btn:hover {
+  box-shadow: 
+    0 8px 25px rgba(46, 204, 113, 0.5),
+    0 4px 12px rgba(0, 0, 0, 0.15);
+}
+*/
+
+/* Royal Purple Theme */
+/*
+.submit-btn {
+  background: linear-gradient(135deg, #8e44ad 0%, #9b59b6 100%);
+  box-shadow: 
+    0 4px 15px rgba(142, 68, 173, 0.4),
+    0 2px 8px rgba(0, 0, 0, 0.1);
+  color: white;
+}
+
+.submit-btn:hover {
+  box-shadow: 
+    0 8px 25px rgba(142, 68, 173, 0.5),
+    0 4px 12px rgba(0, 0, 0, 0.15);
+}
+*/
+
+/* Warm Orange Theme */
+/*
+.submit-btn {
+  background: linear-gradient(135deg, #e67e22 0%, #f39c12 100%);
+  box-shadow: 
+    0 4px 15px rgba(230, 126, 34, 0.4),
+    0 2px 8px rgba(0, 0, 0, 0.1);
+  color: white;
+}
+
+.submit-btn:hover {
+  box-shadow: 
+    0 8px 25px rgba(230, 126, 34, 0.5),
+    0 4px 12px rgba(0, 0, 0, 0.15);
+}
+*/
+</style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 </head>
@@ -234,7 +429,9 @@
 
       <!-- Submit -->
       <button class="submit-btn" onclick="handleDonate()">
-        <span id="submitLabel">Donate $25 Now</span>
+        <span class="submit-btn__icon">❤️</span>
+        <span class="submit-btn__text" id="submitLabel">Donate $25 Now</span>
+        <span class="submit-btn__shine"></span>
       </button>
 
       <div class="secure-note">

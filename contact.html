@@ -438,6 +438,9 @@ body {
 .mobile-nav .m-donate:hover { color: var(--gold) !important; background: rgba(212,134,10,0.08); padding-left: 32px; }
 .mobile-nav .m-donate::before { background: var(--gold) !important; }
 .mobile-nav .m-donate:hover::before { opacity: 1; }
+.mobile-nav .m-contact { color: #000000 !important; justify-content: flex-start; }
+.mobile-nav .m-contact:hover { color: #000000 !important; background: rgba(0,0,0,0.05); padding-left: 32px; }
+.mobile-nav .m-contact::before { background: #000000 !important; }
 
 /* MOBILE DROPDOWN */
 .mobile-dropdown {
@@ -1081,7 +1084,7 @@ body {
       </div>
     </div>
     <a href="about.html#gallery" onclick="closeMenu()">Gallery</a>
-    <a href="contact.html" onclick="closeMenu()">Contact</a>
+    <a href="contact.html" class="m-contact" style="color:black" onclick="closeMenu()">Contact</a>
   </div>
 </div>
 

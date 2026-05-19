@@ -362,6 +362,34 @@ body {
   font-size: 0.8rem;
 }
 
+.mobile-nav .m-contact {
+  
+  
+  margin: 12px 28px;
+
+  justify-content: flex-start;
+  padding: 9px 22px !important;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  
+  transform: translateX(0) !important;
+  opacity: 1 !important;
+  transition: background 0.22s, box-shadow 0.22s, transform 0.18s !important;
+}
+
+.mobile-nav .m-contact:hover {
+  background: var(--sky);
+  color: var(--white) !important;
+  box-shadow: 0 4px 20px var(--sky-glow);
+  transform: translateY(-1px) !important;
+  padding-left: 22px !important;
+}
+
+.mobile-nav .m-contact::before {
+  display: none;
+}
+
 /* MOBILE DROPDOWN */
 .mobile-dropdown {
   border-bottom: 1px solid rgba(0,152,200,0.12);
