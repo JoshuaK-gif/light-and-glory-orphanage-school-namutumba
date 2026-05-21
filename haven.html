@@ -11,6 +11,9 @@
   <style>
       *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
+       --nav-h: 76px;
+      --nav-h-sm: 52px;
+      --transition: all 0.38s cubic-bezier(0.22, 1, 0.36, 1);
       --gold:   #c9933a;
       --gold-light: #d4a659;
       --gold-pale: #f5edd6;
@@ -774,18 +777,27 @@
   .ft-divider { margin: 0 22px; }
 }
     /* ── RESPONSIVE ── */
-    @media (max-width: 820px) {
-      .navbar { padding: 0 24px; }
-      .nav-links { display: none; }
-      .navbar .hamburger { display: flex; z-index: 2000; }
-      .drawer-backdrop { display: block; }
-    }
+  
     @media (max-width: 680px) {
       .overview-grid { grid-template-columns: 1fr; }
       .skills-grid { grid-template-columns: 1fr; }
       
       .btn-secondary { margin-left: 0; margin-top: 0.8rem; display: block; }
     }
+     @media (max-width: 820px) {
+       .navbar { padding: 0 24px; }
+       .nav-links { display: none; }
+       .hamburger { display: flex !important; z-index: 2000; }
+       .drawer-backdrop { display: block; }
+     }
+    
+    /* This part fixes the small mobile phone view */
+    @media (max-width: 480px) {
+     .navbar { padding: 0 16px; }
+     .logo-name { font-size: 0.9rem; }
+      .logo-sub { display: none; }
+      .hamburger { display: flex !important; transform: scale(1.1); }
+   }
   </style>
 </head>
 <body>

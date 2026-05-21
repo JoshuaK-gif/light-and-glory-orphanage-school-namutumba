@@ -8,201 +8,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Lato:wght@300;400;700&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="donate.css">
-<style>
-/* ═══════════════════════════════════════════════════════════
-   ENHANCED DONATE BUTTON STYLING
-   ═══════════════════════════════════════════════════════════ */
 
-.submit-btn {
-  position: relative;
-  width: 100%;
-  padding: 18px 32px;
-  margin-top: 24px;
-  
-  /* Modern gradient background */
-  background: linear-gradient(135deg, #d4af37 0%, #f4d03f 50%, #d4af37 100%);
-  background-size: 200% 100%;
-  
-  /* Smooth borders */
-  border: none;
-  border-radius: 12px;
-  
-  /* Text styling */
-  font-family: 'Lato', sans-serif;
-  font-size: 18px;
-  font-weight: 700;
-  color: #1a1a1a;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  
-  /* Shadow for depth */
-  box-shadow: 
-    0 4px 15px rgba(212, 175, 55, 0.4),
-    0 2px 8px rgba(0, 0, 0, 0.1);
-  
-  /* Smooth transitions */
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  
-  cursor: pointer;
-  overflow: hidden;
-  
-  /* Flex for icon alignment */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-}
-
-/* Icon styling */
-.submit-btn__icon {
-  font-size: 22px;
-  animation: heartbeat 2s ease-in-out infinite;
-}
-
-/* Text wrapper */
-.submit-btn__text {
-  position: relative;
-  z-index: 2;
-}
-
-/* Animated shine effect */
-.submit-btn__shine {
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 50%;
-  height: 100%;
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    rgba(255, 255, 255, 0.4) 50%,
-    transparent 100%
-  );
-  transform: skewX(-25deg);
-  transition: left 0.6s ease;
-}
-
-/* Hover effects */
-.submit-btn:hover {
-  background-position: 100% 0;
-  transform: translateY(-2px);
-  box-shadow: 
-    0 8px 25px rgba(212, 175, 55, 0.5),
-    0 4px 12px rgba(0, 0, 0, 0.15);
-}
-
-.submit-btn:hover .submit-btn__shine {
-  left: 150%;
-}
-
-/* Active (pressed) state */
-.submit-btn:active {
-  transform: translateY(0);
-  box-shadow: 
-    0 2px 10px rgba(212, 175, 55, 0.3),
-    0 1px 4px rgba(0, 0, 0, 0.1);
-}
-
-/* Focus state for accessibility */
-.submit-btn:focus {
-  outline: 3px solid rgba(212, 175, 55, 0.5);
-  outline-offset: 2px;
-}
-
-/* Disabled state */
-.submit-btn:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
-  transform: none;
-}
-
-.submit-btn:disabled:hover {
-  transform: none;
-  box-shadow: 
-    0 4px 15px rgba(212, 175, 55, 0.4),
-    0 2px 8px rgba(0, 0, 0, 0.1);
-}
-
-/* Heartbeat animation for icon */
-@keyframes heartbeat {
-  0%, 100% {
-    transform: scale(1);
-  }
-  10%, 30% {
-    transform: scale(1.1);
-  }
-  20%, 40% {
-    transform: scale(1);
-  }
-}
-
-/* Mobile responsiveness */
-@media (max-width: 768px) {
-  .submit-btn {
-    padding: 16px 24px;
-    font-size: 16px;
-  }
-  
-  .submit-btn__icon {
-    font-size: 20px;
-  }
-}
-
-/* ═══════════════════════════════════════════════════════════
-   ALTERNATIVE COLOR SCHEMES (commented out - uncomment to use)
-   ═══════════════════════════════════════════════════════════ */
-
-/* Green Compassion Theme */
-/*
-.submit-btn {
-  background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);
-  box-shadow: 
-    0 4px 15px rgba(46, 204, 113, 0.4),
-    0 2px 8px rgba(0, 0, 0, 0.1);
-  color: white;
-}
-
-.submit-btn:hover {
-  box-shadow: 
-    0 8px 25px rgba(46, 204, 113, 0.5),
-    0 4px 12px rgba(0, 0, 0, 0.15);
-}
-*/
-
-/* Royal Purple Theme */
-/*
-.submit-btn {
-  background: linear-gradient(135deg, #8e44ad 0%, #9b59b6 100%);
-  box-shadow: 
-    0 4px 15px rgba(142, 68, 173, 0.4),
-    0 2px 8px rgba(0, 0, 0, 0.1);
-  color: white;
-}
-
-.submit-btn:hover {
-  box-shadow: 
-    0 8px 25px rgba(142, 68, 173, 0.5),
-    0 4px 12px rgba(0, 0, 0, 0.15);
-}
-*/
-
-/* Warm Orange Theme */
-/*
-.submit-btn {
-  background: linear-gradient(135deg, #e67e22 0%, #f39c12 100%);
-  box-shadow: 
-    0 4px 15px rgba(230, 126, 34, 0.4),
-    0 2px 8px rgba(0, 0, 0, 0.1);
-  color: white;
-}
-
-.submit-btn:hover {
-  box-shadow: 
-    0 8px 25px rgba(230, 126, 34, 0.5),
-    0 4px 12px rgba(0, 0, 0, 0.15);
-}
-*/
-</style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 </head>
@@ -340,13 +146,17 @@
       <!-- Amount selection -->
       <span class="amount-label">Select Amount (USD)</span>
       <div class="amount-grid">
-        <button class="amount-btn" onclick="selectAmount(this, 10)">
+        <button class="amount-btn" onclick="selectAmount(this, 5)">
+          <span class="amount-btn__usd">$5</span>
+          <span class="amount-btn__ugx">≈ UGX 18,500</span>
+        </button>
+        <button class="amount-btn selected" onclick="selectAmount(this, 10)">
           <span class="amount-btn__usd">$10</span>
           <span class="amount-btn__ugx">≈ UGX 37,000</span>
         </button>
-        <button class="amount-btn selected" onclick="selectAmount(this, 25)">
-          <span class="amount-btn__usd">$25</span>
-          <span class="amount-btn__ugx">≈ UGX 92,000</span>
+        <button class="amount-btn" onclick="selectAmount(this, 20)">
+          <span class="amount-btn__usd">$20</span>
+          <span class="amount-btn__ugx">≈ UGX 74,000</span>
         </button>
         <button class="amount-btn" onclick="selectAmount(this, 50)">
           <span class="amount-btn__usd">$50</span>
@@ -356,13 +166,9 @@
           <span class="amount-btn__usd">$100</span>
           <span class="amount-btn__ugx">≈ UGX 370,000</span>
         </button>
-        <button class="amount-btn" onclick="selectAmount(this, 250)">
-          <span class="amount-btn__usd">$250</span>
-          <span class="amount-btn__ugx">≈ UGX 925,000</span>
-        </button>
-        <button class="amount-btn" onclick="selectAmount(this, 500)">
-          <span class="amount-btn__usd">$500</span>
-          <span class="amount-btn__ugx">≈ UGX 1.85M</span>
+        <button class="amount-btn" onclick="selectAmount(this, 200)">
+          <span class="amount-btn__usd">$200</span>
+          <span class="amount-btn__ugx">≈ UGX 740,000</span>
         </button>
       </div>
 
@@ -370,7 +176,7 @@
       <div class="custom-amount-wrap">
         <span class="currency">$</span>
         <input type="number" id="customAmount" placeholder="Or enter custom amount" min="1"
-          oninput="clearAmountBtns()" value="25">
+          oninput="clearAmountBtns()" value="10">
       </div>
 
       <div class="divider"><span>Your Details</span></div>
@@ -398,33 +204,12 @@
       <div class="divider"><span>Payment Method</span></div>
 
       <!-- Payment method selection -->
-      <span class="pay-label">Choose how to pay</span>
+      <span class="pay-label">Payment Method</span>
       <div class="pay-methods">
-        <button class="pay-btn selected" onclick="selectPay(this, 'pesapal')">
+        <button class="pay-btn selected" style="grid-column: span 3; cursor: default;">
           <div class="pay-btn__logo"><span class="fw-logo">psp</span></div>
-          <span class="pay-btn__label">Pesapal</span>
+          <span class="pay-btn__label">Secure Online Payment (Pesapal)</span>
         </button>
-        <button class="pay-btn" onclick="selectPay(this, 'paypal')">
-          <div class="pay-btn__logo"><span class="pp-logo">PayPal</span></div>
-          <span class="pay-btn__label">PayPal</span>
-        </button>
-        <button class="pay-btn" onclick="selectPay(this, 'mobilemoney')">
-          <div class="pay-btn__logo"><span class="mm-logo">📱</span></div>
-          <span class="pay-btn__label">Mobile Money</span>
-        </button>
-      </div>
-
-      <!-- Mobile Money instructions panel -->
-      <div class="mm-panel" id="mmPanel">
-        <p>
-          Send your donation directly via Mobile Money to:<br>
-          <strong>+256 757970467 · Light &amp; Glory Orphanage</strong><br>
-          Then fill in your details above and click <strong>Confirm Donation</strong> — we'll verify and send your receipt.
-        </p>
-        <div class="mm-networks">
-          <span class="mm-chip">MTN Mobile Money</span>
-          <span class="mm-chip">Airtel Money</span>
-        </div>
       </div>
 
       <!-- Submit -->
@@ -876,17 +661,6 @@ const SUPABASE_EDGE_FUNCTION_URL = "https://jebencmorwugfhjulnus.supabase.co/fun
 // How: Make.com → New Scenario → Webhooks → Custom Webhook → Copy URL
 const MAKE_WEBHOOK_URL = "https://hook.eu1.make.com/YOUR_WEBHOOK_ID_HERE";
 
-// Replace with the client's real PayPal donation button ID
-// How: PayPal → Pay & Get Paid → Donate Buttons → copy hosted_button_id
-const PAYPAL_BUTTON_ID = "YOUR_PAYPAL_BUTTON_ID";
-
-// Mobile money instructions shown to donor after they choose MM
-const MOBILE_MONEY = {
-  number:   "0700 000 000",   // ← replace with client's actual MM number
-  provider: "MTN Mobile Money",
-  name:     "Light & Glory Orphanage School"
-};
-
 // ── SUPABASE CONFIG ──────────────────────────────────────────
 const SUPABASE_URL = "https://jebencmorwugfhjulnus.supabase.co";
 const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImplYmVuY21vcnd1Z2ZoanVsbnVzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzgwMDU0NjQsImV4cCI6MjA5MzU4MTQ2NH0.JowepYmCvKq6WPI_DBQbLSiB2dHNd83IJplNvPUKVbQ";
@@ -910,10 +684,9 @@ if (typeof emailjs !== "undefined") {
 // ────────────────────────────────────────────────────────────
 
 
-// ── STATE ────────────────────────────────────────────────────
+// ── STATE ───────────────────────────────────────────────────
 let selectedAmount = 25;
 let selectedFreq   = "once";
-let selectedPay    = "pesapal";
 // ────────────────────────────────────────────────────────────
 
 
@@ -953,18 +726,6 @@ function clearAmountBtns() {
   updateSubmitLabel();
 }
 
-function selectPay(btn, method) {
-  selectedPay = method;
-  document.querySelectorAll(".pay-btn").forEach(b => b.classList.remove("selected"));
-  btn.classList.add("selected");
-  const mmPanel = document.getElementById("mmPanel");
-  if (method === "mobilemoney") {
-    mmPanel.classList.add("show");
-  } else {
-    mmPanel.classList.remove("show");
-  }
-}
-
 function updateSubmitLabel() {
   const amt   = parseFloat(document.getElementById("customAmount").value) || selectedAmount;
   const label = document.getElementById("submitLabel");
@@ -984,6 +745,11 @@ function validateForm() {
   const lastName  = document.getElementById("lastName").value.trim();
   const email     = document.getElementById("email").value.trim();
   const amt       = parseFloat(document.getElementById("customAmount").value) || selectedAmount;
+
+  if (PESAPAL_CONSUMER_KEY === "YOUR_PESAPAL_CONSUMER_KEY") {
+    alert("System Error: Payment gateway configuration is missing. Please set the PESAPAL_CONSUMER_KEY.");
+    return null;
+  }
 
   if (!firstName || !lastName) {
     alert("Please enter your full name.");
@@ -1025,19 +791,9 @@ function generateTxRef(prefix) {
 // ── MAIN DONATE HANDLER ──────────────────────────────────────
 function handleDonate() {
   const form = validateForm();
-  if (!form) return; // validation failed
+  if (!form) return;
 
-  const { firstName, lastName, email, phone, amt } = form;
-
-  if (selectedPay === "pesapal") {
-    handlePesapal({ firstName, lastName, email, phone, amt });
-
-  } else if (selectedPay === "paypal") {
-    handlePayPal({ firstName, lastName, email, amt });
-
-  } else if (selectedPay === "mobilemoney") {
-    handleMobileMoney({ firstName, lastName, email, phone, amt });
-  }
+  handlePesapal(form);
 }
 // ────────────────────────────────────────────────────────────
 
@@ -1047,61 +803,51 @@ function handleDonate() {
 // iframe URL using your Consumer Key & Secret stored server-side.
 // Supports: MTN Mobile Money, Airtel Money, Visa, Mastercard
 async function handlePesapal({ firstName, lastName, email, phone, amt }) {
-  const txRef = generateTxRef("LGO");
+  const txRef = `LGO-${Date.now()}`;
   const isMonthly = selectedFreq === "monthly";
 
-  // Show loading state on the button
+  // Loading state
   const submitBtn = document.querySelector(".submit-btn");
   const submitLabel = document.getElementById("submitLabel");
   const originalLabel = submitLabel.textContent;
+  
   submitBtn.disabled = true;
-  submitLabel.textContent = "Opening payment...";
+  submitLabel.textContent = "Processing...";
 
   try {
-    // Call Supabase Edge Function — secret key never touches the browser
     const response = await fetch(SUPABASE_EDGE_FUNCTION_URL, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ firstName, lastName, email, phone, amount: amt, txRef })
+      body: JSON.stringify({ 
+        firstName, 
+        lastName, 
+        email, 
+        phone, 
+        amount: amt, 
+        txRef,
+        consumer_key: PESAPAL_CONSUMER_KEY,
+        env: PESAPAL_ENV
+      })
     });
 
     const data = await response.json();
 
     if (!data.iframe_url) {
-      submitBtn.disabled = false;
-      submitLabel.textContent = originalLabel;
-      showError("Could not connect to payment. Please try again.\n\nDetails: " + (data.error || "Unknown error"));
-      return;
+      throw new Error(data.error || "Failed to initialize payment");
     }
 
-    // Store tracking ID so we can verify after payment
-    localStorage.setItem("order_tracking_id", data.order_tracking_id);
-    localStorage.setItem("tx_ref", txRef);
-
-    // Build and show the payment modal with the Pesapal iframe
+    // Modal with iframe
     const modal = document.createElement("div");
     modal.id = "pesapalModal";
-    modal.style.cssText = `
-      position:fixed; top:0; left:0; width:100%; height:100%;
-      background:rgba(0,0,0,0.7); z-index:9999;
-      display:flex; align-items:center; justify-content:center;
-    `;
+    modal.style.cssText = `position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:10000;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(5px);`;
 
-    const modalContent = document.createElement("div");
-    modalContent.style.cssText = `
-      background:#fff; border-radius:12px; padding:20px;
-      width:90%; max-width:520px; max-height:92vh;
-      overflow-y:auto; position:relative;
-    `;
+    const content = document.createElement("div");
+    content.style.cssText = `background:#fff;border-radius:16px;width:95%;max-width:550px;position:relative;overflow:hidden;box-shadow:0 25px 50px rgba(0,0,0,0.5);`;
 
-    const closeBtn = document.createElement("button");
-    closeBtn.textContent = "✕ Close";
-    closeBtn.style.cssText = `
-      position:absolute; top:10px; right:10px;
-      background:#f44336; color:#fff; border:none;
-      padding:6px 12px; border-radius:6px; cursor:pointer; z-index:1;
-    `;
-    closeBtn.onclick = () => {
+    const close = document.createElement("button");
+    close.innerHTML = "✕";
+    close.style.cssText = `position:absolute;top:15px;right:15px;background:#eee;border:none;width:32px;height:32px;border-radius:50%;cursor:pointer;z-index:10;font-weight:bold;`;
+    close.onclick = () => {
       document.body.removeChild(modal);
       submitBtn.disabled = false;
       submitLabel.textContent = originalLabel;
@@ -1109,114 +855,37 @@ async function handlePesapal({ firstName, lastName, email, phone, amt }) {
 
     const iframe = document.createElement("iframe");
     iframe.src = data.iframe_url;
-    iframe.style.cssText = "width:100%; height:520px; border:none; margin-top:10px;";
+    iframe.style.cssText = `width:100%;height:600px;border:none;display:block;`;
 
-    // Listen for Pesapal payment confirmation message from iframe
-    window.addEventListener("message", function pesapalListener(event) {
+    // Success listener
+    window.addEventListener("message", (event) => {
       if (event.data && event.data.pesapal_transaction_tracking_id) {
-        window.removeEventListener("message", pesapalListener);
         if (document.getElementById("pesapalModal")) {
           document.body.removeChild(modal);
         }
         showSuccess({
-          ref:       event.data.pesapal_merchant_reference || txRef,
-          method:    "pesapal",
+          ref: txRef,
+          method: "pesapal",
           amt,
           email,
           firstName,
           lastName,
           phone,
-          isMonthly,
-          verified:  true
+          isMonthly
         });
       }
     });
 
-    modalContent.appendChild(closeBtn);
-    modalContent.appendChild(iframe);
-    modal.appendChild(modalContent);
+    content.appendChild(close);
+    content.appendChild(iframe);
+    modal.appendChild(content);
     document.body.appendChild(modal);
 
   } catch (err) {
-    submitBtn.disabled = false;
-    submitLabel.textContent = originalLabel;
-    showError("Payment failed to load. Check your internet connection and try again.");
-    console.error("Pesapal Edge Function error:", err);
-  } finally {
+    alert("Connection Error: " + err.message);
     submitBtn.disabled = false;
     submitLabel.textContent = originalLabel;
   }
-}
-// ────────────────────────────────────────────────────────────
-
-
-// ── PAYPAL HANDLER ───────────────────────────────────────────
-// FIXED: No longer shows success immediately.
-// Opens PayPal in a new tab and shows a "pending" message.
-// Real confirmation comes when PayPal fires its webhook to Make.com.
-function handlePayPal({ firstName, lastName, email, amt }) {
-  const paypalUrl = `https://www.paypal.com/donate/?hosted_button_id=${PAYPAL_BUTTON_ID}`;
-
-  // Open PayPal in a new tab
-  window.open(paypalUrl, "_blank");
-
-  // Show a PENDING screen — not a success screen
-  // We do NOT call showSuccess() here because payment hasn't happened yet
-  showPending({
-    method:    "paypal",
-    amt,
-    email,
-    firstName,
-    lastName
-  });
-}
-// ────────────────────────────────────────────────────────────
-
-
-// ── MOBILE MONEY HANDLER ─────────────────────────────────────
-// FIXED: No longer shows fake success.
-// Shows payment instructions to the donor with a unique reference.
-// The client manually confirms payment and marks it in their records.
-function handleMobileMoney({ firstName, lastName, email, phone, amt }) {
-  const mmRef = generateTxRef("MM");
-
-  // Show the MM instructions screen — not a success screen
-  showMMInstructions({
-    ref:       mmRef,
-    amt,
-    email,
-    firstName,
-    lastName,
-    phone
-  });
-
-  // Save PENDING donation to Supabase
-  saveDonation({
-    reference:     mmRef,
-    firstName,
-    lastName,
-    email,
-    amount:        amt,
-    campaign:      "general",
-    status:        "pending",
-    paymentMethod: "mobilemoney"
-  });
-
-  // Log the PENDING donation to Make.com so the client can follow up
-  sendToMake({
-    reference:      mmRef,
-    amount:         amt,
-    currency:       "USD",
-    frequency:      selectedFreq,
-    payment_method: "mobilemoney",
-    status:         "pending_confirmation", // ← honest status
-    first_name:     firstName,
-    last_name:      lastName,
-    email,
-    phone,
-    donated_at:     new Date().toISOString(),
-    source:         "Light & Glory Donate Page"
-  });
 }
 // ────────────────────────────────────────────────────────────
 
@@ -1267,83 +936,6 @@ function showSuccess({ ref, method, amt, email, firstName, lastName, phone, isMo
     donated_at:     new Date().toISOString(),
     source:         "Light & Glory Donate Page"
   });
-}
-// ────────────────────────────────────────────────────────────
-
-
-// ── PENDING SCREEN (PayPal) ──────────────────────────────────
-// Shows a "complete your payment in the PayPal tab" message.
-// You need to add a div with id="pendingState" in your HTML.
-function showPending({ method, amt, email, firstName, lastName }) {
-  document.querySelector(".donate-card__header").style.display = "none";
-  document.querySelector(".donate-card__body").style.display = "none";
-
-  const pending = document.getElementById("pendingState");
-  if (pending) {
-    pending.classList.add("show");
-    const nameEl = document.getElementById("pendingName");
-    const amtEl  = document.getElementById("pendingAmt");
-    if (nameEl) nameEl.textContent = firstName;
-    if (amtEl)  amtEl.textContent  = `$${amt}`;
-  } else {
-    // Fallback if pendingState div doesn't exist yet in HTML
-    alert(
-      `A PayPal tab has been opened.\n\nPlease complete your $${amt} donation there.\n\nOnce done, you'll receive a confirmation email from PayPal at ${email}.`
-    );
-  }
-
-  // Log pending to Make.com so client knows someone started a PayPal donation
-  sendToMake({
-    reference:      generateTxRef("PP"),
-    amount:         amt,
-    currency:       "USD",
-    frequency:      selectedFreq,
-    payment_method: "paypal",
-    status:         "pending_paypal", // ← honest status
-    first_name:     firstName,
-    last_name:      lastName,
-    email,
-    phone:          "",
-    donated_at:     new Date().toISOString(),
-    source:         "Light & Glory Donate Page"
-  });
-}
-// ────────────────────────────────────────────────────────────
-
-
-// ── MOBILE MONEY INSTRUCTIONS SCREEN ────────────────────────
-// Shows the donor exactly how to pay via MM.
-// You need to add a div with id="mmInstructionsState" in your HTML.
-function showMMInstructions({ ref, amt, email, firstName, lastName, phone }) {
-  document.querySelector(".donate-card__header").style.display = "none";
-  document.querySelector(".donate-card__body").style.display = "none";
-
-  const mmScreen = document.getElementById("mmInstructionsState");
-  if (mmScreen) {
-    mmScreen.classList.add("show");
-    const els = {
-      mmRef:      document.getElementById("mmRef"),
-      mmAmt:      document.getElementById("mmAmt"),
-      mmNumber:   document.getElementById("mmNumber"),
-      mmProvider: document.getElementById("mmProvider"),
-      mmName:     document.getElementById("mmName")
-    };
-    if (els.mmRef)      els.mmRef.textContent      = ref;
-    if (els.mmAmt)      els.mmAmt.textContent       = `$${amt}`;
-    if (els.mmNumber)   els.mmNumber.textContent    = MOBILE_MONEY.number;
-    if (els.mmProvider) els.mmProvider.textContent  = MOBILE_MONEY.provider;
-    if (els.mmName)     els.mmName.textContent      = MOBILE_MONEY.name;
-  } else {
-    // Fallback if mmInstructionsState div doesn't exist in HTML yet
-    alert(
-      `To complete your $${amt} donation via Mobile Money:\n\n` +
-      `Send to: ${MOBILE_MONEY.number}\n` +
-      `Provider: ${MOBILE_MONEY.provider}\n` +
-      `Account name: ${MOBILE_MONEY.name}\n` +
-      `Reference: ${ref}\n\n` +
-      `Please use the reference above so we can match your payment.`
-    );
-  }
 }
 // ────────────────────────────────────────────────────────────
 
@@ -1423,6 +1015,7 @@ async function sendEmails({ firstName, lastName, email, amt, reference, method, 
 
 // ── MAKE.COM WEBHOOK ─────────────────────────────────────────
 async function sendToMake(donationData) {
+  if (MAKE_WEBHOOK_URL.includes("YOUR_WEBHOOK_ID")) return;
   try {
     await fetch(MAKE_WEBHOOK_URL, {
       method:  "POST",
@@ -1431,57 +1024,10 @@ async function sendToMake(donationData) {
     });
     console.log("✅ Donation data sent to Make.com:", donationData.reference);
   } catch (err) {
-    // Silent fail — don't break the donor experience if Make.com is down
     console.error("❌ Make.com webhook failed:", err);
   }
 }
 // ────────────────────────────────────────────────────────────
-
-
-// ── HTML SNIPPETS YOU NEED TO ADD ────────────────────────────
-/*
-  Add these three divs to your HTML, right after your existing
-  #successState div. Style them to match your success screen.
-
-  1) PAYPAL PENDING STATE:
-  ────────────────────────
-  <div id="pendingState" class="donate-card__state" style="display:none">
-    <h3>Almost there, <span id="pendingName"></span>!</h3>
-    <p>A PayPal tab has opened. Please complete your <strong><span id="pendingAmt"></span></strong> donation there.</p>
-    <p>Once PayPal confirms your payment, you'll receive a receipt by email.</p>
-    <p><small>You can close this tab after donating.</small></p>
-  </div>
-
-  2) MOBILE MONEY INSTRUCTIONS STATE:
-  ─────────────────────────────────────
-  <div id="mmInstructionsState" class="donate-card__state" style="display:none">
-    <h3>How to complete your donation</h3>
-    <p>Send <strong><span id="mmAmt"></span></strong> via <span id="mmProvider"></span>:</p>
-    <ul>
-      <li>Number: <strong><span id="mmNumber"></span></strong></li>
-      <li>Account name: <strong><span id="mmName"></span></strong></li>
-      <li>Reference: <strong><span id="mmRef"></span></strong></li>
-    </ul>
-    <p><small>Please use the reference above so we can match your payment. We'll email you a receipt once confirmed.</small></p>
-  </div>
-
-  3) EXISTING SUCCESS STATE (keep as-is, just shown here for reference):
-  ────────────────────────────────────────────────────────────────────────
-  <div id="successState" class="donate-card__state">
-    <p>Reference: <span id="refCode"></span></p>
-  </div>
-
-  NOTE ON MONTHLY DONATIONS:
-  ──────────────────────────
-  The monthly toggle currently works as a label — it adds a note to the
-  Pesapal checkout and logs "monthly" to Make.com/Google Sheets.
-  For TRUE auto-recurring charges (card billed every month automatically):
-  1. Go to Pesapal Dashboard → Recurring Payments → Create a Plan
-  2. Set: monthly interval, USD, give it a name
-  3. Copy the Plan ID
-  4. In handlePesapal() above, pass the plan ID in the order params
-  This requires the client to have a verified live Pesapal account.
-*/
 </script>
 </body>
 </html>

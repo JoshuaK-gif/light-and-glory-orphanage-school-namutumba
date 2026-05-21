@@ -22,7 +22,7 @@
   /* Nav heights */
   --nav-h:         76px;
   --nav-h-sm:      52px;
-
+--transition: all 0.38s cubic-bezier(0.22, 1, 0.36, 1);
   /* Dropdown variables */
   --ease:          cubic-bezier(0.22, 1, 0.36, 1);
   --gold-pale:     var(--cream);
@@ -800,16 +800,22 @@ h1, h2, h3, h4, h5, h6 {
 .mobile-dropdown-content a:last-child {
   border-bottom: none !important;
 }
+ @media (max-width: 820px) {
+      .navbar { padding: 0 24px; }
+      .nav-links { display: none; }
+      .hamburger { display: flex !important; z-index: 2000; }
+     .drawer-backdrop { display: block; }
+     }
+    
+   /* This part fixes the small mobile phone view */
+    @media (max-width: 480px) {
+      .navbar { padding: 0 16px; }
+      .logo-name { font-size: 0.9rem; }
+      .logo-sub { display: none; }
+      .hamburger { display: flex !important; transform: scale(1.1); }
+      .hamburger { display: flex !important; transform: scale(1.1); }
+   }
 
-/* ================================================================
-   RESPONSIVE — navbar shrinks padding; links stay visible.
-   Hamburger only appears below 480px where space truly runs out.
-   ================================================================ */
-@media (max-width: 820px) {
-  .navbar { padding: 0 24px; }
-  .nav-links { display: none; }
-  .hamburger { display: flex; }
-  .drawer-backdrop { display: block; }
   
   .hero-strip { padding: 48px 24px 72px; }
   .page-wrap { grid-template-columns: 1fr; margin-top: -32px; }
@@ -823,11 +829,6 @@ h1, h2, h3, h4, h5, h6 {
   /* Shrink logo text */
   .logo-name { font-size: 0.88rem; }
   .logo-sub  { font-size: 0.52rem; letter-spacing: 2px; }
-}
-
-/* ══════════════════════════════
-   FOOTER
-══════════════════════════════ */
 /* ══════════════════════════════
    FOOTER
 ══════════════════════════════ */

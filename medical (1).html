@@ -13,22 +13,24 @@
     :root {
       --gold:       #c98a1a;
       --gold-light: #e8a82a;
+      --gold-pale:  #FEF3DC;
+      --gold-glow:  rgba(212,134,10,0.35);
       --sky:        #1a9fd4;
       --sky-light:  #3dbde8;
+      --sky-dark:   #0E7A95;
+      --sky-glow:   rgba(0,152,200,0.25);
       --navy:       #0d1b2a;
       --navy-mid:   #1a2e42;
       --green:      #1a5c2a;
       --cream:      #f8f4ee;
       --white:      #ffffff;
       --text:       #2a2a2a;
+      --ink:        #0E0E0E;
       --radius:     10px;
-      --nav-h:      72px;
+      --nav-h:      76px;
       --nav-h-sm:   52px;
-      --transition: all 0.38s cubic-bezier(0.4, 0, 0.2, 1);
-      --ease:       cubic-bezier(0.4, 0, 0.2, 1);
-      --gold-glow:  rgba(201,138,26,0.35);
-      --sky-glow:   rgba(26,159,212,0.35);
-      --gold-pale:  rgba(201,138,26,0.08);
+      --transition: all 0.38s cubic-bezier(0.22, 1, 0.36, 1);
+      --ease:       cubic-bezier(0.22, 1, 0.36, 1);
     }
     body { font-family: 'Lato', sans-serif; color: var(--text); background: var(--cream); font-size: 18px; line-height: 1.85; }
 
@@ -625,21 +627,27 @@
 
     /* ── RESPONSIVE ── */
     @media (max-width: 820px) {
-      .navbar { padding: 0 24px; }
-      .nav-links { display: none; }
-      .navbar .hamburger { display: flex; z-index: 2000; }
-      .drawer-backdrop { display: block; }
+     .navbar { padding: 0 24px; }
+     .nav-links { display: none; }
+     .hamburger { display: flex !important; z-index: 2000; }
+     .drawer-backdrop { display: block; }
     }
-    
+
+    @media (max-width: 480px) {
+     .navbar { padding: 0 16px; }
+     .logo-name { font-size: 0.9rem; }
+     .logo-sub { display: none; }
+     .hamburger { display: flex !important; transform: scale(1.1); }
+    }
+
     @media (max-width: 720px) {
-      .overview-grid { grid-template-columns: 1fr; }
-      .services-grid { grid-template-columns: 1fr; }
-      .footer-grid { grid-template-columns: 1fr; }
-      .btn-secondary { margin-left: 0; margin-top: 0.8rem; display: block; width: fit-content; margin: 0.8rem auto 0; }
-      .nav-links { gap: 0.9rem; }
-      .overview-text { border-left: none; padding-left: 0; border-top: 4px solid var(--gold); padding-top: 1rem; }
-    }
-  </style>
+     .overview-grid { grid-template-columns: 1fr; }
+     .services-grid { grid-template-columns: 1fr; }
+     .footer-grid { grid-template-columns: 1fr; }
+     .btn-secondary { margin-left: 0; margin-top: 0.8rem; display: block; width: fit-content; margin: 1rem auto 0; }
+     .nav-links { gap: 0.9rem; }
+     .overview-text { border-left: none; padding-left: 0; border-top: 4px solid var(--gold); padding-top: 1rem; }
+    }  </style>
 </head>
 <body>
 
